@@ -1,0 +1,80 @@
+nav {
+  margin-bottom: 0px !important;
+}
+
+#top-nav {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #dddddd;
+}
+
+.navbar-nav > li {
+  min-width: 80px;
+  text-align: center;
+}
+
+.navbar-light .navbar-nav .active {
+  border-bottom: 5px solid #5bc0eb;
+}
+
+.mobile-brand {
+  position: absolute;
+  left: 13px;
+  top: 13px;
+}
+
+
+.mobile-menu-bars {
+  line-height: 60px;
+  position: absolute;
+  right: 18px;
+  font-size: 1.7em;
+  color: #44a9e7;
+}
+
+nav.mobile.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  background-color: #FFF;
+  min-width: 100%;
+  z-index: 1030;
+  border-top: 1px solid #dddddd;
+  height: 60px;
+  padding: 8px 15px 0px 8px;
+  line-height: 45px;
+}
+
+.nav-item {
+  border-bottom: 5px solid transparent;
+}
+
+.active-bottom-nav {
+  height: 51px;
+  border-bottom: 5px solid #5bc0eb;
+}
+
+nav.mobile.bottom-nav img {
+  height: 35px;
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+
+.active-bottom-nav img {
+  -webkit-filter: grayscale(0%) !important;
+  filter: grayscale(0%) !important;
+}
+
+nav.mobile.top-nav {
+  height: 60px;
+  position: fixed;
+  top: 0px;
+  text-align: center;
+  background-color: #fff;
+  border-bottom: 1px solid #dddddd;
+  z-index: 1030;
+  width: 100%;
+}
+
+nav.mobile.top-nav .header-text {
+  font-weight: 600;
+  line-height: 60px;
+}
