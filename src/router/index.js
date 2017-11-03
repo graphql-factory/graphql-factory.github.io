@@ -39,7 +39,8 @@ const router = new Router({
       meta: {
         title: 'Learn',
         exact: false,
-        default: 'learn'
+        default: 'learn',
+        desktopMenu: true
       },
       children: [
         {
@@ -130,7 +131,8 @@ const router = new Router({
       component: Docs,
       meta: {
         title: 'Docs',
-        exact: true
+        exact: true,
+        desktopMenu: true
       }
     },
     {
@@ -139,7 +141,8 @@ const router = new Router({
       component: Tutorials,
       meta: {
         title: 'Tutorials',
-        exact: true
+        exact: true,
+        desktopMenu: true
       }
     },
     {
@@ -148,7 +151,8 @@ const router = new Router({
       component: Plugins,
       meta: {
         title: 'Plugins',
-        exact: true
+        exact: true,
+        desktopMenu: true
       }
     },
     {

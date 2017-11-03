@@ -79,7 +79,9 @@
         }
       },
       menuRoutes () {
-        return _.get(this.$router, 'options.routes', []).slice(1)
+        return _.get(this.$router, 'options.routes', []).filter(route => {
+          return _.get(route, 'meta.desktopMenu') === true
+        })
       }
     },
     methods: {

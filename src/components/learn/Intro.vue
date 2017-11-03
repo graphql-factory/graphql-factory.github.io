@@ -1,7 +1,7 @@
 <template lang="pug">
   .container-fluid
     .text-left
-      h3 Introduction to GraphQL Factory
+      h3 GraphQL Factory
       callout(type="primary")
         | These documents assume you are already familiar with graphql concepts.
         | If you are not, it is recommended that you first review the&nbsp;
