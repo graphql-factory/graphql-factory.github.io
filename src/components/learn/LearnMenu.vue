@@ -33,7 +33,7 @@
     list-style: none;
   }
   .link-menu > ul > li {
-    font-size: 0.85em;
+    font-size: 0.9em;
     cursor: pointer;
   }
 

@@ -9,7 +9,7 @@
 
 <script type="text/babel">
   import { mapGetters } from 'vuex'
-  import LearnMenu from './LearnMenu'
+  import LearnMenu from '@/components/learn/LearnMenu'
   export default {
     computed: {
       ...mapGetters([

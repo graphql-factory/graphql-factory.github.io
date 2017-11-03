@@ -1,18 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store'
-import Main from '@/components/Main'
-import Learn from '@/components/Learn'
-import LearnIntro from '@/components/learn/Intro'
-import LearnSetup from '@/components/learn/Setup'
-import LearnFactory from '@/components/learn/Factory'
-import LearnDefs from '@/components/learn/Definitions'
-import LearnTypeDefs from '@/components/learn/TypeDefinitions'
-import LearnSchemaDefs from '@/components/learn/SchemaDefinitions'
-import LearnFunctions from '@/components/learn/Functions'
-import LearnContext from '@/components/learn/Context'
-import LearnTypeLanguage from '@/components/learn/TypeLanguage'
-import LearnMiddleware from '@/components/learn/Middleware'
+import Welcome from '@/components/welcome/Welcome'
+import Learn from '@/components/learn/Learn'
+import LearnTopic from '@/components/learn/LearnTopic'
 
 import Docs from '@/components/Docs'
 import Tutorials from '@/components/Tutorials'
@@ -20,14 +11,16 @@ import Plugins from '@/components/Plugins'
 import Search from '@/components/Search'
 import Credits from '@/components/Credits'
 
+import { learn } from '../data'
+
 Vue.use(Router)
 
 const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'main',
-      component: Main,
+      name: 'welcome',
+      component: Welcome,
       meta: {
         title: 'Welcome!',
         exact: true
@@ -46,81 +39,91 @@ const router = new Router({
         {
           path: '/',
           name: 'learn',
-          component: LearnIntro,
+          component: LearnTopic,
           meta: {
-            title: 'Introduction'
+            title: 'Introduction',
+            config: learn.intro
           }
         },
         {
           path: 'setup',
           name: 'learn.setup',
-          component: LearnSetup,
+          component: LearnTopic,
           meta: {
-            title: 'Setup'
+            title: 'Setup',
+            config: learn.setup
           }
         },
         {
           path: 'factory',
           name: 'learn.factory',
-          component: LearnFactory,
+          component: LearnTopic,
           meta: {
-            title: 'The Factory'
+            title: 'The Factory',
+            config: learn.factory
           }
         },
         {
           path: 'definitions',
           name: 'learn.definitions',
-          component: LearnDefs,
+          component: LearnTopic,
           meta: {
-            title: 'Definitions'
+            title: 'Definitions',
+            config: learn.definitions
           }
         },
         {
           path: 'type-definitions',
           name: 'learn.typeDefinitions',
-          component: LearnTypeDefs,
+          component: LearnTopic,
           meta: {
-            title: 'Type Definitions'
+            title: 'Type Definitions',
+            config: learn.typeDefinitions
           }
         },
         {
           path: 'schema-definitions',
           name: 'learn.schemaDefinitions',
-          component: LearnSchemaDefs,
+          component: LearnTopic,
           meta: {
-            title: 'Schema Definitions'
+            title: 'Schema Definitions',
+            config: learn.schemaDefinitions
           }
         },
         {
           path: 'functions',
           name: 'learn.functions',
-          component: LearnFunctions,
+          component: LearnTopic,
           meta: {
-            title: 'Functions'
+            title: 'Functions',
+            config: learn.functions
           }
         },
         {
           path: 'context',
           name: 'learn.context',
-          component: LearnContext,
+          component: LearnTopic,
           meta: {
-            title: 'Context'
+            title: 'Context',
+            config: learn.context
           }
         },
         {
           path: 'type-language',
           name: 'learn.typeLanguage',
-          component: LearnTypeLanguage,
+          component: LearnTopic,
           meta: {
-            title: 'Type Language'
+            title: 'Type Language',
+            config: learn.typeLanguage
           }
         },
         {
           path: 'middleware',
           name: 'learn.middleware',
-          component: LearnMiddleware,
+          component: LearnTopic,
           meta: {
-            title: 'Middleware'
+            title: 'Middleware',
+            config: learn.middleware
           }
         }
       ]

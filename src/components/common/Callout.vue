@@ -1,17 +1,21 @@
 <template lang="pug">
-  .bs-callout.alert.text-left(:class="clazz")
-    slot
+  .bs-callout.alert.text-left(:class="clazz", v-html="markup")
 </template>
 
 <script type="text/babel">
   export default {
+    name: 'callout',
     props: {
       type: {
         type: String,
         default: 'primary'
-      }
+      },
+      html: String
     },
     computed: {
+      markup () {
+        return this.html.replace(/```(\S+)```/g, '<code>$1</code>')
+      },
       clazz () {
         return [
           `bs-callout-${this.type}`,

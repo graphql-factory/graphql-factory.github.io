@@ -5,11 +5,12 @@
         i.fa.fa-times(@click="toggleMobileMenu")
         | &nbsp;&nbsp;{{title}}
     learn-menu.readable-text.scrollable.custom-scroll(v-if="$route.name.match('learn')", :style="bodyStyle")
-
+    welcome-menu.readable-text.scrollable.custom-scroll(v-if="$route.name === 'welcome'", :style="bodyStyle")
 </template>
 
 <script type="text/babel">
-  import LearnMenu from './LearnMenu'
+  import LearnMenu from '@/components/learn/LearnMenu'
+  import WelcomeMenu from '@/components/welcome/WelcomeMenu'
   import { mapActions } from 'vuex'
   export default {
     computed: {
@@ -29,7 +30,8 @@
       }
     },
     components: {
-      LearnMenu
+      LearnMenu,
+      WelcomeMenu
     },
     methods: {
       ...mapActions([

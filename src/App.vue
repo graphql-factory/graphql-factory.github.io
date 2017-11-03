@@ -5,8 +5,8 @@
     nav.navbar.navbar-expand-lg.navbar-light.fixed-top(v-if="!isMobile", id="top-nav", ref="topNav")
       .container(v-if="!isMobile")
         .navbar-collapse.collapse
-          router-link.navbar-brand(:to="{ name: 'main' }", exact)
-            img.logo-desktop(src="./assets/graphql-factory-35px.png")
+          router-link.navbar-brand(:to="{ name: 'welcome' }", exact)
+            img.logo-desktop(src="./assets/graphql-factory.svg", style="height: 35px;")
           ul.navbar-nav.mr-auto.mt-2.mt-lg-0
             router-link.nav-item(v-for="(route, idx) in menuRoutes",
             :key="idx", tag="li", active-class="active",
@@ -18,8 +18,8 @@
               span.input-group-addon(style="background: transparent;border-left: 0px;")
                 i.fa.fa-search
     nav.mobile.top-nav(v-if="isMobile", ref="mobileTopNav")
-        router-link.mobile-brand(:to="{ name: 'main' }")
-          img(src="./assets/graphql-factory-35px.png")
+        router-link.mobile-brand(:to="{ name: 'welcome' }")
+          img(src="./assets/graphql-factory.svg", style="height: 35px;")
         span.header-text(v-text="$route.meta.title")
         i.fa.fa-bars.mobile-menu-bars(@click="toggleMobileMenu")
     nav.mobile.bottom-nav(v-if="isMobile", ref="mobileBottomNav")
@@ -72,11 +72,13 @@
         const { windowHeight, topNav, bottomNav } = this.dimensions
         const paddingTop = this.isMobile ? '10px' : null
         const overflowY = this.isMobile ? 'scroll' : 'auto'
+        const mainHeight = `${windowHeight - topNav - bottomNav}px`
         return {
           'padding-top': paddingTop,
           'overflow-y': overflowY,
           'margin-top': `${topNav}px`,
-          'max-height': `${windowHeight - topNav - bottomNav}px`
+          'height': mainHeight,
+          'max-height': mainHeight
         }
       },
       menuRoutes () {
