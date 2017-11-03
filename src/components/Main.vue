@@ -12,7 +12,7 @@
       gh-button(user="graphql-factory", type="follow", :flat="true", text="Follow @graphql-factory")
       br
       router-link.credits(:to="{ name: 'credits' }", exact)
-        i.fa.fa-users
+        span(style="font-size: 0.8em;") credits
 </template>
 
 <script type="text/babel">

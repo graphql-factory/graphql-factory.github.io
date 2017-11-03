@@ -34,7 +34,7 @@
           img(src="./assets/web-development.svg")
         router-link.col.nav-item(tag="div", active-class="active-bottom-nav", :to="{ name: 'plugins'}", exact)
           img(src="./assets/socket.svg")
-    main(id="main", role="main", :style="mainStyle", :class="isMobile ? '' : 'custom-scroll'")
+    main.custom-scroll(id="main", role="main", :style="mainStyle")
       .container
         router-view
 </template>
@@ -95,9 +95,6 @@
           window.innerHeight < MOBILE_WIDTH
         this.setMobile(isMobile)
         this.updateDimensions(isMobile)
-        document.body.style.overflow = isMobile
-          ? ''
-          : 'hidden'
       },
       updateDimensions (isMobile) {
         this.$nextTick(() => {
