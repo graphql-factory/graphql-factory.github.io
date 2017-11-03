@@ -18,6 +18,7 @@ div, span, p, li, button, a {
 main {
   padding-bottom: 50px;
   padding-top: 30px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-overlay-menu {

@@ -71,9 +71,10 @@
       mainStyle () {
         const { windowHeight, topNav, bottomNav } = this.dimensions
         const paddingTop = this.isMobile ? '10px' : null
+        const overflowY = this.isMobile ? 'scroll' : 'auto'
         return {
           'padding-top': paddingTop,
-          'overflow': 'auto',
+          'overflow-y': overflowY,
           'margin-top': `${topNav}px`,
           'max-height': `${windowHeight - topNav - bottomNav}px`
         }
