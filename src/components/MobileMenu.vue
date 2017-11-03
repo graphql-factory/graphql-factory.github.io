@@ -1,6 +1,6 @@
 <template lang="pug">
   .mobile-overlay-menu.text-left
-    .container.bg-factory.text-white.mobile-header
+    .container.bg-factory.text-white.mobile-header(style="height: 76px;")
       h4
         i.fa.fa-times(@click="toggleMobileMenu")
         | &nbsp;&nbsp;{{title}}
@@ -23,7 +23,8 @@
       bodyStyle () {
         return {
           height: `${window.innerHeight - 76}px`,
-          overflow: 'auto'
+          'overflow-y': 'scroll',
+          '-webkit-overflow-scrolling': 'touch'
         }
       }
     },
