@@ -4,10 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import InstantSearch from 'vue-instantsearch'
 import 'prismjs/themes/prism.css'
 import './css/style.css'
 
 Vue.config.productionTip = false
+Vue.use(InstantSearch)
 
 /* eslint-disable no-new */
 new Vue({

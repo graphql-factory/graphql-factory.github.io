@@ -4,29 +4,36 @@
     ul
       li(style="color: #000; font-weight: 300;")
         b Learn v3.0.0
-    ul
-      router-link(tag="li", :to="{ name: 'learn' }", active-class="active", exact) Introduction
-      router-link(tag="li", :to="{ name: 'learn.setup' }", active-class="active", exact) Setup
-      router-link(tag="li", :to="{ name: 'learn.factory' }", active-class="active", exact) The Factory
-    ul
-      router-link(tag="li", :to="{ name: 'learn.definitions' }", active-class="active", exact) Definitions
-      router-link(tag="li", :to="{ name: 'learn.typeDefinitions' }", active-class="active", exact) Type Definitions
-      router-link(tag="li", :to="{ name: 'learn.schemaDefinitions' }", active-class="active", exact) Schema Definitions
-      router-link(tag="li", :to="{ name: 'learn.functions' }", active-class="active", exact) Functions
-      router-link(tag="li", :to="{ name: 'learn.context' }", active-class="active", exact) Context
-      router-link(tag="li", :to="{ name: 'learn.typeLanguage' }", active-class="active", exact) Type Language
-    ul
-      router-link(tag="li", :to="{ name: 'learn.middleware' }", active-class="active", exact) Middleware
-    ul
-      li Libraries
-      li Building a Library
-      li Library Repository
-      li Making Requests
-    ul
-      li Plugins
-      li Structure
-      li Authoring
+    ul(v-for="(section, sIdx) in menuItems", :key="sIdx")
+      router-link(v-for="(link, lIdx) in section",
+      :key="lIdx",
+      tag="li",
+      :to="{ name: link.name }",
+      active-class="active",
+      v-text="link.meta.title", exact)
 </template>
+
+<script type="text/babel">
+  import _ from '../../common/litedash'
+  export default {
+    computed: {
+      menuItems () {
+        const learn = _.get(this.$router, 'options.routes').filter(route => {
+          return route.path === '/learn'
+        })
+        return _.get(learn, '0.children', []).reduce((accum, item) => {
+          const section = _.get(item, 'meta.section')
+          if (section) {
+            accum.push([item])
+          } else {
+            accum[accum.length - 1].push(item)
+          }
+          return accum
+        }, [])
+      }
+    }
+  }
+</script>
 
 <style scoped>
   .link-menu > ul {
@@ -35,11 +42,17 @@
   .link-menu > ul > li {
     font-size: 0.9em;
     cursor: pointer;
+    border-left: 3px solid #5bafdb;
   }
 
   .link-menu > ul > li:first-child {
     color: #5bafdb;
     font-weight: 600;
+    border-left: none;
+  }
+
+  .link-menu > ul > li:not(:first-child):before {
+    content: "\00a0 ";
   }
 
   li.active {

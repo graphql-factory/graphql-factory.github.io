@@ -1,3 +1,4 @@
+@import url("animations.css");
 @import url("callout.css");
 @import url("nav.css");
 
@@ -73,10 +74,12 @@ main {
   margin-top: 0px;
 }
 
-a.credits {
-  font-size: 1em;
-  color: #bbb;
+.credits {
+  color: #ccc;
   cursor: pointer;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .bg-factory {

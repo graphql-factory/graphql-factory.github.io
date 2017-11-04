@@ -15,6 +15,11 @@
         a(href="https://www.flaticon.com/authors/vectors-market") Vectors Market
         | &nbsp;from&nbsp;
         a(href="https://www.flaticon.com") www.flaticon.com
+      li
+        | Icons made by&nbsp;
+        a(href="https://www.flaticon.com/authors/dinosoftlabs") DinosoftLabs
+        | &nbsp;from&nbsp;
+        a(href="https://www.flaticon.com") www.flaticon.com
     ul
       li Inspiration
       li

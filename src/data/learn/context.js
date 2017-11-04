@@ -40,8 +40,9 @@ export default {
       component: 'list',
       ordered: false,
       items: [
-        '```graphql``` the graphql library',
-        '```lib``` the GraphQL Factory library instance'
+        '```graphql``` - the graphql library',
+        '```lib``` - the GraphQL Factory library instance',
+        '```factory``` - the GraphQL Factory instance'
       ]
     },
     {
@@ -62,8 +63,9 @@ const definition = {
         listFoo: {
           type: '[Foo]!'
           resolve (source, args, context, info) {
-            const { r, lib } = context
+            const { r, lib, factory } = context
             lib.emit('info', info)
+            factory.emit('request', [...arguments])
             return r.table('foo')
           }
         }

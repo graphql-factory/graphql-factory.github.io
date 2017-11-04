@@ -1,3 +1,7 @@
+import api from './api/index'
 import learn from './learn/index'
 
-export { learn }
+export {
+  api,
+  learn
+}

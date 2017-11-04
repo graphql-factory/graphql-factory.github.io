@@ -10,6 +10,11 @@ const SET_DIMENSIONS = 'SET_DIMENSIONS'
 const TOGGLE_MOBILE_MENU = 'TOGGLE_MOBILE_MENU'
 
 const state = {
+  algolia: {
+    apiKey: '80d8cb65cf8d4338b3c8e85fe04d48a3',
+    appId: '4LE3OOJNJZ',
+    indexName: 'graphqlfactory'
+  },
   isMobile: false,
   showMobileMenu: false,
   dimensions: {
@@ -48,7 +53,8 @@ const actions = {
 const getters = {
   isMobile: state => state.isMobile,
   showMobileMenu: state => state.showMobileMenu,
-  dimensions: state => state.dimensions
+  dimensions: state => state.dimensions,
+  algolia: state => state.algolia
 }
 
 export default new Vuex.Store({

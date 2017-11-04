@@ -6,7 +6,7 @@
         h3 Site Map
       router-link(v-for="(route, index) in menuRoutes",
       tag="li", :key="index",
-      :to="{ name: route.name }",
+      :to="route.path",
       v-text="route.meta.title")
 </template>
 

@@ -1,4 +1,5 @@
 <template lang="pug">
-  .container
-    h1 Tutorials
+  .container.text-left
+    p
+      | There are currently no tutorials. Try back later!
 </template>

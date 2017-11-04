@@ -56,6 +56,7 @@
     font-size: 0.9em;
   }
   button.next-topic {
+    color: #555;
     background-color: transparent;
     border: 1px solid #ccc;
     border-radius: 2px;
@@ -64,5 +65,9 @@
   button.next-topic:hover {
     color: #fdfdfd;
     background-color: #00aced;
+  }
+  button.next-topic:active, button.next-topic:focus {
+    color: #555;
+    background-color: transparent;
   }
 </style>

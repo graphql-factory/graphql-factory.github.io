@@ -4,8 +4,9 @@ import store from '../store'
 import Welcome from '@/components/welcome/Welcome'
 import Learn from '@/components/learn/Learn'
 import LearnTopic from '@/components/learn/LearnTopic'
+import API from '@/components/api/API'
+import APIDoc from '@/components/api/APIDoc'
 
-import Docs from '@/components/Docs'
 import Tutorials from '@/components/Tutorials'
 import Plugins from '@/components/Plugins'
 import Search from '@/components/Search'
@@ -42,7 +43,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Introduction',
-            config: learn.intro
+            config: learn.intro,
+            section: true
           }
         },
         {
@@ -69,7 +71,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Definitions',
-            config: learn.definitions
+            config: learn.definitions,
+            section: true
           }
         },
         {
@@ -123,20 +126,87 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Middleware',
-            config: learn.middleware
+            config: learn.middleware,
+            section: true
+          }
+        },
+        {
+          path: 'libraries',
+          name: 'learn.libraries',
+          component: LearnTopic,
+          meta: {
+            title: 'Libraries',
+            config: learn.libraries,
+            section: true
+          }
+        },
+        {
+          path: 'build-library',
+          name: 'learn.buildLibrary',
+          component: LearnTopic,
+          meta: {
+            title: 'Building a Library',
+            config: learn.buildLibrary
+          }
+        },
+        {
+          path: 'registry',
+          name: 'learn.registry',
+          component: LearnTopic,
+          meta: {
+            title: 'Registry',
+            config: learn.registry
+          }
+        },
+        {
+          path: 'making-requests',
+          name: 'learn.makingRequests',
+          component: LearnTopic,
+          meta: {
+            title: 'MakingRequests',
+            config: learn.makingRequests
+          }
+        },
+        {
+          path: 'plugins',
+          name: 'learn.plugins',
+          component: LearnTopic,
+          meta: {
+            title: 'Plugins',
+            config: learn.plugins,
+            section: true
+          }
+        },
+        {
+          path: 'authoring-plugins',
+          name: 'learn.authoringPlugins',
+          component: LearnTopic,
+          meta: {
+            title: 'Authoring Plugins',
+            config: learn.authoringPlugins
           }
         }
       ]
     },
     {
-      path: '/docs',
-      name: 'docs',
-      component: Docs,
+      path: '/api',
+      component: API,
       meta: {
-        title: 'Docs',
-        exact: true,
+        title: 'API',
+        exact: false,
+        default: 'api',
         desktopMenu: true
-      }
+      },
+      children: [
+        {
+          path: '/',
+          name: 'api',
+          component: APIDoc,
+          meta: {
+            title: 'API'
+          }
+        }
+      ]
     },
     {
       path: '/tutorials',

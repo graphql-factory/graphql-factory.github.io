@@ -14,6 +14,15 @@
               a.nav-link {{route.meta.title}}
           form.form-inline.my-2.my-lg-0
             .input-group
+              // ais-index(:app-id="algolia.appId", :api-key="algolia.apiKey", :index-name="algolia.indexName")
+                ais-search-box
+                .search-results
+                  ais-results(inline-template)
+                    table.table.table-bordered.table-striped(style="margin-bottom: 0px;")
+                      tbody
+                        router-link(tag="tr", :to="result.to", v-for="result in results", :key="result.objectID", style="cursor: pointer;")
+                          th(scope="row", v-text="result.title")
+                          td(v-text="result.description")
               input.form-control(type="search", style="border-right: 0px; font-size: 0.8em;")
               span.input-group-addon(style="background: transparent;border-left: 0px;")
                 i.fa.fa-search
@@ -25,15 +34,15 @@
     nav.mobile.bottom-nav(v-if="isMobile", ref="mobileBottomNav")
       .row
         router-link.col.nav-item(tag="div", active-class="active-bottom-nav", :to="{ name: 'learn'}", :exact="false")
-          img(src="./assets/learning.svg")
-        router-link.col.nav-item(tag="div", active-class="active-bottom-nav", :to="{ name: 'docs'}", exact)
-          img(src="./assets/library.svg")
+          img(src="./assets/mobile/learning.svg")
+        router-link.col.nav-item(tag="div", active-class="active-bottom-nav", :to="{ name: 'api'}", exact)
+          img(src="./assets/mobile/api.svg")
         router-link.col.nav-item(tag="div", active-class="active-bottom-nav", :to="{ name: 'search'}", exact)
-          img(src="./assets/search.svg")
+          img(src="./assets/mobile/search.svg")
         router-link.col.nav-item(tag="div", active-class="active-bottom-nav", :to="{ name: 'tutorials'}", exact)
-          img(src="./assets/web-development.svg")
+          img(src="./assets/mobile/tutorials.svg")
         router-link.col.nav-item(tag="div", active-class="active-bottom-nav", :to="{ name: 'plugins'}", exact)
-          img(src="./assets/socket.svg")
+          img(src="./assets/mobile/plugins.svg")
     main.custom-scroll(id="main", role="main", :style="mainStyle")
       .container
         router-view
@@ -66,7 +75,8 @@
       ...mapGetters([
         'isMobile',
         'showMobileMenu',
-        'dimensions'
+        'dimensions',
+        'algolia'
       ]),
       mainStyle () {
         const { windowHeight, topNav, bottomNav } = this.dimensions
@@ -121,3 +131,38 @@
     }
   }
 </script>
+
+<style>
+  .ais-index input {
+    border: 1px solid rgb(206, 212, 218);
+    padding: 6px 12px 6px 12px;
+    font-size: 0.8em;
+    border-radius: 2px;
+    box-sizing: border-box;
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  .ais-search-box__submit {
+    display: none;
+  }
+
+  .ais-clear {
+    display: none;
+  }
+
+  .search-results {
+    font-size: 0.9em;
+    border-radius: 3px;
+    border: none;
+    /* box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2); */
+    min-width: 350px;
+    background-color: #fdfdfd;
+    padding: 0px;
+    position: absolute;
+    margin-top: 5px;
+    right: 0px;
+    z-index: 1050;
+  }
+</style>

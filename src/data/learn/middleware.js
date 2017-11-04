@@ -1,11 +1,9 @@
 export default {
   title: 'Middleware',
-  /*
   next: {
     title: 'Libraries',
     name: 'learn.libraries'
   },
-  */
   content: [
     {
       component: 'paragraph',

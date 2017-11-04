@@ -1,4 +1,5 @@
 <template lang="pug">
-  .container
-    h1 Plugins
+  .container.text-left
+    p
+      | Documentation in progress...
 </template>
