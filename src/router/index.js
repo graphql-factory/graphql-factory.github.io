@@ -9,7 +9,7 @@ import APIDoc from '@/components/api/APIDoc'
 
 import Tutorials from '@/components/Tutorials'
 import Plugins from '@/components/Plugins'
-import Search from '@/components/Search'
+import Search from '@/components/search/Search'
 import Credits from '@/components/Credits'
 
 import { learn } from '../data'
