@@ -109,11 +109,6 @@ main {
   padding-right: 5px;
 }
 
-code.language-javascript {
-  font-size: 0.9em;
-  font-family: "Roboto Mono", Menlo, Monaco, monospace;
-}
-
 .prism-custom {
   background-color: #fdfdfd !important;
   padding: 5px;
@@ -121,6 +116,12 @@ code.language-javascript {
   border-top: 1px solid #bababa;
   border-right: 1px solid #bababa;
   border-bottom: 1px solid #bababa;
+}
+.prism-custom span {
+  font-family: Menlo, "Lucida Console" !important;
+  font-size: 95%;
+  line-height: 1.5;
+  font-weight: 400;
 }
 
 textarea:hover,

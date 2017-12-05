@@ -32,18 +32,29 @@ export default {
       component: 'paragraph',
       html: 'GraphQL Factory is a toolkit for designing and extending graphql ' +
       'definitions. It is designed to be extensible via plugins and middleware ' +
-      'so that you can build on work the community has already published.'
+      'so that you can build on work the community has already published or ' +
+      'make your own contributions'
     },
     {
       component: 'paragraph',
-      html: 'At its core, GraphQL Factory builds a definition object that is converted ' +
-      'into a registry of types and schemas that can be accessed directly or through ' +
-      'a library via the ```request``` method which allows you to accomplish this'
+      html: 'At its core, GraphQL Factory provides a set of tools for building definitions ' +
+      'in ```GraphQL&nbsp;Factory&nbsp;Definition&nbsp;Format``` which is a ```JSON``` ' +
+      'structured JavaScript object. This object can be extended and incrementally built' +
+      'before eventually exporting or building a schema from it allowing you to create this'
     },
     {
       component: 'prism',
       language: 'javascript',
-      code: `const User = new GraphQLObjectType({
+      code: `import {
+  GraphQLObjectType,
+  GraphQLSchema,
+  GraphQLNonNull,
+  GraphQLList,
+  GraphQLID,
+  GraphQLString
+} from 'graphql'
+
+const User = new GraphQLObjectType({
   name: 'User',
   fields: {
     id: { type: new GraphQLNonNull(GraphQLID) },
@@ -56,7 +67,7 @@ const UserQuery = new GraphQLObjectType({
   name: 'UserQuery'
   fields: {
     listUsers: {
-      type: User,
+      type: new GraphQLList(User),
       resolve (source, args, context, info) {
         const { r } = context
         return r.table('user')
@@ -65,7 +76,7 @@ const UserQuery = new GraphQLObjectType({
   }
 })
 
-const UsersSchema = new GraphQLSchema({
+const schema = new GraphQLSchema({
   query: UserQuery
 })`
     },
@@ -76,7 +87,9 @@ const UsersSchema = new GraphQLSchema({
     {
       component: 'prism',
       language: 'javascript',
-      code: `const definition = {
+      code: `import { SchemaDefinition } from 'graphql-factory'
+
+const definition = {
   types: {
     User: {
       fields: {
@@ -88,7 +101,7 @@ const UsersSchema = new GraphQLSchema({
     UserQuery: {
       fields: {
         listUsers: {
-          type: 'User',
+          type: '[User]',
           resolve (source, args, context, info) {
             const { r } = context
             return r.table('user')
@@ -97,12 +110,49 @@ const UsersSchema = new GraphQLSchema({
       }
     }
   },
-  schemas: {
-    UsersSchema: {
-      query: 'UserQuery'
-    }
+  schema: {
+    query: 'UserQuery'
   }
-}`
+}
+
+const schema = new SchemaDefinition()
+  .use(definition)
+  .buildSchema()
+`
+    },
+    {
+      component: 'paragraph',
+      html: 'Or using a combination of Schema Language and a ```SchemaBacking``` object like this'
+    },
+    {
+      component: 'prism',
+      language: 'javascript',
+      code: `import { SchemaBacking, SchemaDefinition } from 'graphql-factory'
+const definition = \`
+type User {
+  id: ID!
+  name: String!
+  email: String
+}
+type UserQuery {
+  listUsers: User
+}
+schema {
+  query: UserQuery
+}\`
+
+const backing = new SchemaBacking()
+  .Object('UserQuery')
+  .resolve('listUsers', (source, args, context, info) => {
+    const { r } = context
+    return r.table('user')
+  })
+  .backing()
+
+const schema = new SchemaDefinition()
+  .use(definition, backing)
+  .buildSchema()
+`
     }
   ]
 }
