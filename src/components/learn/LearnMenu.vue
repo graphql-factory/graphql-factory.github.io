@@ -38,6 +38,7 @@
 <style scoped>
   .link-menu > ul {
     list-style: none;
+    padding-right: 40px;
   }
   .link-menu > ul > li {
     font-size: 0.9em;

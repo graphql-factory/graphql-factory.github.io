@@ -8,9 +8,10 @@ export default {
     {
       component: 'paragraph',
       html: 'Type definitions are almost identical to native graphql type ' +
-      'configurations except that since types are generated at the same time, ' +
-      'we need to add a little bit of extra information and reference other ' +
-      'types using the schema definition format for types.'
+      'configurations except that since types are not explicitly instantiated ' +
+      'a ```type``` field is required in order to correctly build the type. ' +
+      'Additionally since types are stored in a ```key:definition``` hash, the ' +
+      '```name``` field is not required on the definition.'
     },
     {
       component: 'paragraph',
@@ -34,14 +35,13 @@ export default {
   types:{
     Foo: {
       type: 'Object',
-      name: 'Foo',
       fields: {
-        ...
+        // field definitions
       }
     }
   },
-  schemas: {
-    ...
+  schema: {
+    // schema definition
   }
 }`
     },
@@ -53,7 +53,7 @@ export default {
       component: 'list',
       ordered: false,
       items: [
-        '```Object``` (default, can be omitted)',
+        '```Object```',
         '```Enum```',
         '```Scalar```',
         '```Input```',
@@ -69,14 +69,14 @@ export default {
       component: 'paragraph',
       html: 'Field and argument configurations both contain ' +
       'a type key. In graphql you would place a reference to an ' +
-      'actual type object. In GraphQL Factory you instead use a type ' +
-      'language type string like ```"ID!"```.'
+      'actual type object. In GraphQL Factory you instead use the ' +
+      '```Schema&nbsp;Language``` representation (i.e. ```"ID!"```).'
     },
     {
       component: 'paragraph',
       html: 'Additionally when specifying a field/arg configuration that ' +
-      'contains a type, you can simply put the type string instead of ' +
-      'an object with a type key containing the type string.'
+      'only contains type configuration, you can simply put the type ' +
+      'representation instead of a full field/arg definition.'
     },
     {
       component: 'prism',
@@ -84,14 +84,12 @@ export default {
       code: `{
   types:{
     Foo: {
-      name: 'Foo',
       fields: {
         id: { type: 'ID!' }
       }
     },
     FooQuery: {
-      // type can be omitted and 'Object' will be used
-      // name can be omitted and key will be used
+      type: 'Object',
       fields: {
         listFoo: {
           type: '[Foo]!',
@@ -99,14 +97,14 @@ export default {
             id: 'ID' // value can be supplied as string instead of object
           },
           resolve (source, args, context, info) {
-            ...
+            // resolve code
           }
         }
       }
     }
   },
-  schemas: {
-    ...
+  schema: {
+    // schema definition
   }
 }`
     },
@@ -128,41 +126,15 @@ export default {
     },
     {
       component: 'paragraph',
-      html: '<h5># Inter-mixing graphql</h5>'
+      html: '<h5># Directives</h5>'
     },
     {
       component: 'paragraph',
-      html: 'Every object that is "used" in a definition goes through an expand ' +
-      'process that checks the structure, fills in missing information, and decomposes ' +
-      'graphql types/schemas into factory definitions. This allows for inter-mixing of ' +
-      'graphql objects with factory definitions making the following a completely valid ' +
-      'definition'
-    },
-    {
-      component: 'prism',
-      language: 'javascript',
-      code: `{
-  types: {
-    Foo: {
-      name: 'Foo',
-      fields: {
-        id: new GraphQLNonNull(GraphQLID)
-      }
-    }
-  }
-}`
-    },
-    {
-      component: 'paragraph',
-      html: '<h5># Custom Fields</h5>'
-    },
-    {
-      component: 'paragraph',
-      html: 'Custom fields can be added by adding non-reserved keys to the type ' +
-      'definition. As a best practice, custom fields should be prefixed with an ' +
-      'underscore. Custom fields can be useful to middleware and resolver functions ' +
-      'to add data that can help the middleware/resolver make a decision on how data ' +
-      'should be processed or requested.'
+      html: 'In order to modify the execution or provide additional ' +
+      'metadata to a request, graphql provides directives. In GraphQL ' +
+      'Factory, directives are pulled from the ```AST``` and injected ' +
+      'into the field resolve info in a summarized format. Directives ' +
+      'are applied at various locations using the ```@directives``` key '
     },
     {
       component: 'prism',
@@ -177,17 +149,24 @@ export default {
             id: 'ID' // value can be supplied as string instead of object
           },
           resolve (source, args, context, info) {
-            ...
+            const metadata = info
+              .directives
+              .FIELD_DEFINITION
+              .metadata
+              .value;
+            // metadata = 'I am metadata'
           },
-          _extendedData: {
-            ...
-          }
+          '@directives': {
+            metadata: {
+              value: 'I am metadata'
+            }
+          },
         }
       }
     }
   },
-  schemas: {
-    ...
+  schema: {
+    // schema definition
   }
 }`
     },

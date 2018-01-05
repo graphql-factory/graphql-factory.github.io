@@ -33,13 +33,22 @@ export default {
       html: 'GraphQL Factory is a toolkit for designing and extending graphql ' +
       'definitions. It is designed to be extensible via plugins and middleware ' +
       'so that you can build on work the community has already published or ' +
-      'make your own contributions'
+      'make your own contributions.'
+    },
+    {
+      component: 'paragraph',
+      html: 'Additionally, GraphQL Factory includes a custom implementation of ' +
+      '```Directive&nbsp;Driven&nbsp;Middleware```. This involves extending the' +
+      '```GraphQLDirective``` type with middleware methods that are evaluated during ' +
+      'GraphQL Factory\'s custom execution. Directive information is also injected into ' +
+      'the field resolve info of every request to make accessing that data more simple ' +
+      'than evaluating the ```AST```.'
     },
     {
       component: 'paragraph',
       html: 'At its core, GraphQL Factory provides a set of tools for building definitions ' +
-      'in ```GraphQL&nbsp;Factory&nbsp;Definition&nbsp;Format``` which is a ```JSON``` ' +
-      'structured JavaScript object. This object can be extended and incrementally built' +
+      'in ```GraphQL&nbsp;Factory&nbsp;Definition&nbsp;Format``` which is a ' +
+      'structured JavaScript object. This object can be extended and incrementally built ' +
       'before eventually exporting or building a schema from it allowing you to create this'
     },
     {

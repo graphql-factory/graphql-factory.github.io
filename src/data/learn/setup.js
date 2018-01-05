@@ -1,8 +1,8 @@
 export default {
   title: 'Setup',
   next: {
-    title: 'The Factory',
-    name: 'learn.factory'
+    title: 'Definitions',
+    name: 'learn.definitions'
   },
   content: [
     {
@@ -38,27 +38,19 @@ export default {
     },
     {
       component: 'paragraph',
-      html: 'GraphQL Factory is itself a class. To create a new factory simply ' +
-      'use <code>new GraphQLFactory()</code> as you would any other object/class.'
+      html: 'GraphQL Factory is now a toolkit and requires no instantiation ' +
+      'of the main library. You instead import the tools you want to use.'
     },
     {
       component: 'callout',
       type: 'info',
-      html: '<b>Note</b> that you must have ```graphql``` in your project ' +
-      'dependencies. In previous versions of GraphQL Factory it was required that ' +
-      'you import and pass the ```graphql``` library to GraphQL Factory ' +
-      'during initialization. To simplify the API it is now imported by the source code'
+      html: 'This differs from ```v2.x``` and below where a ' +
+      'factory instance is created and used to build schemas.'
     },
     {
       component: 'prism',
       language: 'javascript',
-      code: `import GraphQLFactory from 'graphql-factory'
-const factory = new GraphQLFactory()`
-    },
-    {
-      component: 'paragraph',
-      html: 'The factory has now been created and is ready to start using ' +
-      'definitions, plugins, middleware, etc.'
+      code: `import { SchemaDefinition, SchemaBacking } from 'graphql-factory'`
     }
   ]
 }

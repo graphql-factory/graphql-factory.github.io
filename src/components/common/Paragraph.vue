@@ -1,5 +1,5 @@
 <template lang="pug">
-  p(v-html="markup")
+  p(v-html="markup", style="margin-top: 30px;margin-bottom: 30px;")
 </template>
 
 <script type="text/babel">

@@ -1,0 +1,156 @@
+.theme-white, .theme-white-table-head th {
+  background-color: #fafafa;
+  color: #333;
+}
+.theme-white svg.toggler {
+  fill: #333;
+}
+.theme-white-txt {
+  color: #fafafa;
+}
+
+.theme-blue, .theme-blue-table-head th {
+  background-color: #00A9DD;
+  color: #ffffff;
+}
+.theme-blue svg.toggler {
+  fill: #fff;
+}
+.theme-blue-txt {
+  color: #00A9DD;
+}
+
+.theme-aqua, .theme-aqua-table-head th {
+  background-color: rgb(2, 192, 199);
+  color: #ffffff;
+}
+.theme-aqua svg.toggler {
+  fill: #fff;
+}
+.theme-aqua-txt {
+  color: rgb(2, 192, 199);
+}
+
+.theme-red {
+  background-color: rgb(214, 65, 52);
+  color: #ffffff;
+}
+
+.theme-red svg.toggler {
+  fill: #fff;
+}
+
+.theme-red-txt {
+  color: rgb(214, 65, 52);
+}
+
+.theme-red-table-head th {
+  background-color: rgb(214, 65, 52);
+  color: #ffffff;
+}
+
+.theme-yellow {
+  background-color: rgb(191, 175, 6);
+  color: #ffffff;
+}
+
+.theme-yellow svg.toggler {
+  fill: #fff;
+}
+
+.theme-yellow-txt {
+  color: rgb(191, 175, 6);
+}
+
+.theme-yellow-table-head th {
+  background-color: rgb(191, 175, 6);
+  color: #ffffff;
+}
+
+.theme-green {
+  background-color: rgb(57, 167, 130);
+  color: #ffffff;
+}
+
+.theme-green svg.toggler {
+  fill: #fff;
+}
+
+.theme-green-txt {
+  color: rgb(107, 192, 116);
+}
+
+.theme-green-table-head th {
+  background-color: rgb(59, 153, 68);
+  color: #ffffff;
+}
+
+.theme-purple {
+  background-color: rgb(104, 74, 162);
+  color: #ffffff;
+}
+
+.theme-purple svg.toggler {
+  fill: #fff;
+}
+
+.theme-purple-txt {
+  color: rgb(104, 74, 162);
+}
+
+.theme-purple-table-head th {
+  background-color: rgb(104, 74, 162);
+  color: #ffffff;
+}
+
+.pagination-carbon .page-link {
+  color: rgb(77, 77, 77);
+}
+
+.pagination-carbon .page-link:hover {
+  color: rgb(77, 77, 77);
+}
+
+.theme-carbon, .theme-carbon-table-head th, .btn-carbon,
+.pagination-carbon > .page-item.active > .page-link {
+  background-color: rgb(77, 77, 77);
+  color: #ffffff;
+}
+
+.pagination-carbon > .page-item.active > .page-link {
+  border-color: rgb(77, 77, 77);
+}
+
+.btn-carbon:hover, .btn-carbon:active, .btn-carbon:focus {
+  color: #ffffff;
+}
+
+.theme-carbon svg.toggler {
+  fill: #fff;
+}
+
+.theme-carbon-txt {
+  color: rgb(77, 77, 77);
+}
+
+.theme-orange {
+  background-color: rgb(215, 115, 24);
+  color: #ffffff;
+}
+
+.theme-orange svg.toggler {
+  fill: #fff;
+}
+
+.theme-orange-txt {
+  color: rgb(215, 115, 24);
+}
+
+.theme-orange-table-head th {
+  background-color: rgb(215, 115, 24);
+  color: #ffffff;
+}
+
+.theme-black-txt {
+  color: #000000;
+}

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
@@ -8,6 +9,7 @@ const strict = true
 const SET_MOBILE = 'SET_MOBILE'
 const SET_DIMENSIONS = 'SET_DIMENSIONS'
 const TOGGLE_MOBILE_MENU = 'TOGGLE_MOBILE_MENU'
+const TOGGLE_LEFT_MENU = 'TOGGLE_LEFT_MENU'
 
 const state = {
   algolia: {
@@ -21,7 +23,8 @@ const state = {
     windowHeight: window.height,
     topNav: 0,
     bottomNav: 0
-  }
+  },
+  persistent: {}
 }
 
 const mutations = {
@@ -35,6 +38,11 @@ const mutations = {
     state.showMobileMenu = typeof show === 'boolean'
       ? show
       : !state.showMobileMenu
+  },
+  [TOGGLE_LEFT_MENU]: (state, show) => {
+    state.persistent.showLeftMenu = typeof show === 'boolean'
+      ? show
+      : !state.persistent.showLeftMenu
   }
 }
 
@@ -47,6 +55,9 @@ const actions = {
   },
   toggleMobileMenu: ({ commit }, show) => {
     commit(TOGGLE_MOBILE_MENU, show)
+  },
+  toggleLeftMenu: ({ commit }, show) => {
+    commit(TOGGLE_LEFT_MENU, show)
   }
 }
 
@@ -54,6 +65,7 @@ const getters = {
   isMobile: state => state.isMobile,
   showMobileMenu: state => state.showMobileMenu,
   dimensions: state => state.dimensions,
+  showLeftMenu: state => state.persistent.showLeftMenu,
   algolia: state => state.algolia
 }
 
@@ -62,5 +74,11 @@ export default new Vuex.Store({
   state,
   actions,
   getters,
-  mutations
+  mutations,
+  plugins: [
+    createPersistedState({
+      key: 'graphqlfactory.io',
+      paths: ['persistent']
+    })
+  ]
 })

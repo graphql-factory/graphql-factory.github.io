@@ -9,10 +9,14 @@ import APIDoc from '@/components/api/APIDoc'
 
 import Tutorials from '@/components/Tutorials'
 import Plugins from '@/components/Plugins'
+import Directives from '@/components/directives/Directives'
+import Designer from '@/components/designer/Designer'
 import Search from '@/components/search/Search'
 import Credits from '@/components/Credits'
 
 import { learn } from '../data'
+
+import hub from '../hub'
 
 Vue.use(Router)
 
@@ -24,7 +28,8 @@ const router = new Router({
       component: Welcome,
       meta: {
         title: 'Welcome!',
-        exact: true
+        exact: true,
+        theme: 'blue'
       }
     },
     {
@@ -34,7 +39,8 @@ const router = new Router({
         title: 'Learn',
         exact: false,
         default: 'learn',
-        desktopMenu: true
+        desktopMenu: true,
+        theme: 'purple'
       },
       children: [
         {
@@ -44,7 +50,8 @@ const router = new Router({
           meta: {
             title: 'Introduction',
             config: learn.intro,
-            section: true
+            section: true,
+            theme: 'purple'
           }
         },
         {
@@ -53,16 +60,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Setup',
-            config: learn.setup
-          }
-        },
-        {
-          path: 'factory',
-          name: 'learn.factory',
-          component: LearnTopic,
-          meta: {
-            title: 'The Factory',
-            config: learn.factory
+            config: learn.setup,
+            theme: 'purple'
           }
         },
         {
@@ -72,7 +71,8 @@ const router = new Router({
           meta: {
             title: 'Definitions',
             config: learn.definitions,
-            section: true
+            section: true,
+            theme: 'purple'
           }
         },
         {
@@ -81,7 +81,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Type Definitions',
-            config: learn.typeDefinitions
+            config: learn.typeDefinitions,
+            theme: 'purple'
           }
         },
         {
@@ -90,7 +91,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Schema Definitions',
-            config: learn.schemaDefinitions
+            config: learn.schemaDefinitions,
+            theme: 'purple'
           }
         },
         {
@@ -99,7 +101,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Functions',
-            config: learn.functions
+            config: learn.functions,
+            theme: 'purple'
           }
         },
         {
@@ -108,7 +111,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Context',
-            config: learn.context
+            config: learn.context,
+            theme: 'purple'
           }
         },
         {
@@ -117,7 +121,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Type Language',
-            config: learn.typeLanguage
+            config: learn.typeLanguage,
+            theme: 'purple'
           }
         },
         {
@@ -127,7 +132,8 @@ const router = new Router({
           meta: {
             title: 'Middleware',
             config: learn.middleware,
-            section: true
+            section: true,
+            theme: 'purple'
           }
         },
         {
@@ -137,7 +143,8 @@ const router = new Router({
           meta: {
             title: 'Libraries',
             config: learn.libraries,
-            section: true
+            section: true,
+            theme: 'purple'
           }
         },
         {
@@ -146,7 +153,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Building a Library',
-            config: learn.buildLibrary
+            config: learn.buildLibrary,
+            theme: 'purple'
           }
         },
         {
@@ -155,7 +163,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Registry',
-            config: learn.registry
+            config: learn.registry,
+            theme: 'purple'
           }
         },
         {
@@ -164,7 +173,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'MakingRequests',
-            config: learn.makingRequests
+            config: learn.makingRequests,
+            theme: 'purple'
           }
         },
         {
@@ -174,7 +184,8 @@ const router = new Router({
           meta: {
             title: 'Plugins',
             config: learn.plugins,
-            section: true
+            section: true,
+            theme: 'purple'
           }
         },
         {
@@ -183,7 +194,8 @@ const router = new Router({
           component: LearnTopic,
           meta: {
             title: 'Authoring Plugins',
-            config: learn.authoringPlugins
+            config: learn.authoringPlugins,
+            theme: 'purple'
           }
         }
       ]
@@ -203,7 +215,8 @@ const router = new Router({
           name: 'api',
           component: APIDoc,
           meta: {
-            title: 'API'
+            title: 'API',
+            theme: 'carbon'
           }
         }
       ]
@@ -215,7 +228,8 @@ const router = new Router({
       meta: {
         title: 'Tutorials',
         exact: true,
-        desktopMenu: true
+        desktopMenu: true,
+        theme: 'yellow'
       }
     },
     {
@@ -225,7 +239,30 @@ const router = new Router({
       meta: {
         title: 'Plugins',
         exact: true,
-        desktopMenu: true
+        desktopMenu: true,
+        theme: 'orange'
+      }
+    },
+    {
+      path: '/directives',
+      name: 'directives',
+      component: Directives,
+      meta: {
+        title: 'Directives',
+        exact: true,
+        desktopMenu: true,
+        theme: 'aqua'
+      }
+    },
+    {
+      path: '/designer',
+      name: 'designer',
+      component: Designer,
+      meta: {
+        title: 'Designer',
+        exact: true,
+        desktopMenu: true,
+        theme: 'red'
       }
     },
     {
@@ -260,7 +297,7 @@ router.beforeEach(function (to, from, next) {
 
 router.afterEach(function () {
   setTimeout(() => {
-    document.getElementById('main').scrollTo(0, 0)
+    hub.$emit('route.change')
   })
 })
 

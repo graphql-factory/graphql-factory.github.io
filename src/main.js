@@ -4,10 +4,14 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store'
+import hub from './hub'
 import 'prismjs/themes/prism.css'
 import './css/style.css'
 
 Vue.config.productionTip = false
+
+// add the hub as a plugin
+Vue.prototype.$hub = hub
 
 /* eslint-disable no-new */
 new Vue({

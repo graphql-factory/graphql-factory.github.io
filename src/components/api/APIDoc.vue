@@ -1,5 +1,5 @@
 <template lang="pug">
-  .container.text-left
+  .container-fluid.text-left
     h3 GraphQL Factory API Reference
     callout(type="info", html="A subset of the complete API has been documented. \
     The undocumented API deals with internals that should for the most part not \

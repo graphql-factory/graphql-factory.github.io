@@ -1,9 +1,10 @@
 <template lang="pug">
   .link-menu.text-left
+    p
     ul
       li(style="color: #000; font-weight: 400;") API v3.0.0
     ul
-      li factory
+      li.active factory
       li use
       li library
       li before
@@ -30,6 +31,7 @@
 <style scoped>
   .link-menu > ul {
     list-style: none;
+    padding-right: 40px;
   }
   .link-menu > ul > li {
     font-size: 0.9em;
