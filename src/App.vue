@@ -51,7 +51,7 @@
       },
       updateDimensions (isMobile) {
         this.$nextTick(() => {
-          const { topNav, bottomNav, leftNav, rightNav } = isMobile
+          const { topNav, leftNav, rightNav } = isMobile
             ? this.$refs.mobileNav.$refs
             : this.$refs.desktopNav.$refs
 
@@ -59,7 +59,6 @@
             windowWidth: window.innerWidth,
             windowHeight: window.innerHeight,
             topNavHeight: topNav.offsetHeight,
-            bottomNavHeight: isMobile ? bottomNav.offsetHeight : 0,
             leftNavWidth: isMobile ? 0 : leftNav.offsetWidth,
             rightNavWidth: isMobile ? 0 : rightNav.offsetWidth
           })

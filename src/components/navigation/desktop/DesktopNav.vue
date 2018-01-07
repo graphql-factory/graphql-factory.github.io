@@ -113,6 +113,7 @@ export default {
       'toggleLeftMenu'
     ]),
     updateRightNavWidth () {
+      if (!this.$refs.rightNav) return
       const width = this.$refs.rightNav.offsetWidth
       this.rightNavWidth = width > MIN_NAV_WIDTH
         ? width
