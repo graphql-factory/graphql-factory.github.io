@@ -1,107 +1,139 @@
 <template lang="pug">
   .container-fluid.text-left
-    h3 GraphQL Factory API Reference
-    callout(type="info", html="A subset of the complete API has been documented. \
-    The undocumented API deals with internals that should for the most part not \
-    be accessed during regular use. For undocumented functionality please reference \
-    the <a href=\"https://github.com/graphql-factory/graphql-factory\" \
-    target=\"_blank\">source code</a>")
-    h4.sub-title GraphQLFactory
+    h3 API Reference
+    | GraphQL Factory is a toolkit the provides utilities
+    | for building and executing graphql schemas. Only the main utilities are documented
+    | here. Undocumented utilities generally support main utilities and can still be
+    | imported into a project.
+    callout(type="info", html="Please note that the examples here use ES7 syntax which may \
+    require a library like <a href=https://babeljs.io/ target=_blank>babel.js</a>")
+    h4.sub-title(id="SchemaDefinition-anchor") SchemaDefinition <code>extends</code> EventEmitter
+    callout.mono(type="default", html="new SchemaDefinition(options) → SchemaDefinition")
     p
-      | The main class for creating a new <code>factory</code> instance. Create a new instance with <code>new</code>
-    prism.prism-custom(language="javascript", code="import GraphQLFactory from \'graphql-factory\'\nconst factory = new GraphQLFactory()")
-    hr.sub-title
+      | Constructs a schema definition in GraphQL Factory Definition Format. Merges all inputs/imports
+      | into a single definition with customizable merge conflict resolution. Extends the standard
+      | EventEmitter class and emits events during build and execution.
+    callout(type="warning", html="The <code>SchemaDefinition</code> class builds the definition \
+    asynchronously and should be resolved before attempting to access its properties. \
+    This can be done by resolving the <code>definition</code> property,\
+    the <code>buildSchema</code> method, or the <code>use</code> method with no arguments.")
+    prism.prism-custom(language="javascript", code=`import { SchemaDefinition } from 'graphql-factory';
+  const definition = await new SchemaDefinition();`)
+    p
+    h5 <code>parameters</code>
+    table.table.table-bordered.table-sm.table-responsive-sm.mono
+      thead.thead-light
+        tr
+          th(scope="col") Name
+          th(scope="col") Type
+          th(scope="col") Default
+          th(scope="col") Description
+      tbody
+        tr
+          td [options.noDefaultTypes]
+          td <code>boolean</code>
+          td false
+          td Prevents <code>JSON</code> and <code>DateTime</code> types from being automatically added to the definition
+        tr
+          td [options.onConflict]
+          td <code>function</code>
+          td DefaultConflictResolutionFn
+          td Allows a custom conflict resolution function for merge conflicts
+    h5 <code>properties</code>
+    table.table.table-bordered.table-sm.table-responsive-sm.mono
+      thead.thead-light
+        tr
+          th(scope="col") Name
+          th(scope="col") Type
+          th(scope="col") Description
+      tbody
+        tr
+          td definition
+          td <code>Promise&lt;SchemaDefinition&gt;</code>
+          td Used to resolve any current asynchronous code on the definition
+        tr
+          td context
+          td <code>object</code>
+          td The custom context value that will be merged into the execution context
+        tr
+          td functions
+          td <code>object</code>
+          td Map of functions that can be referenced by the <code>SchemaDefinition</code>
+        tr
+          td directives
+          td <code>object</code>
+          td Map of directive definitions
+        tr
+          td types
+          td <code>object</code>
+          td Map of type definitions
+        tr
+          td schema
+          td <code>object</code>
+          td schema definition
+        tr
+          td version
+          td <code>string</code>
+          td <code>SchemaDefinition</code> version in semver format
 
-    h4.sub-title Factory <code>instance</code>
-    p
-      | The factory instance is a chainable definition builder. It extends the <code>EventEmitter</code>
-      | class and is able to generate a GraphQL Factory <code>Library</code> that can be used to make
-      | graphql API requests
+    h5 <code>events</code>
+    table.table.table-bordered.table-sm.table-responsive-sm.mono
+      thead.thead-light
+        tr
+          th(scope="col") Name
+          th(scope="col") Data
+          th(scope="col") Description
+      tbody
+        tr
+          td error
+          td <code>Error</code>
+          td Error thrown from the definition or execution
+        tr
+          td warn
+          td <code>*</code>
+          td Warning data
+        tr
+          td info
+          td <code>*</code>
+          td Informational data
+        tr
+          td execution
+          td <code>ExecutionTrace</code>
+          td An object containing the complete execution tracing details
     hr.sub-title
-
-    h4.sub-title use
-    callout.mono(type="default", html="factory.use(Definition) → Factory<br>\
-    factory.use(Plugin) → Factory<br>\
-    factory.use(Function, functionName) → Factory<br>\
-    factory.use(typeLanguage[, extension, schemaName]) → Factory<br>\
-    factory.use(GraphQLSchema, schemaName) → Factory<br>\
-    factory.use(GraphQLObjectType) → Factory<br>\
-    factory.use(GraphQLInputObjectType) → Factory<br>\
-    factory.use(GraphQLEnumType) → Factory<br>\
-    factory.use(GraphQLScalarType) → Factory<br>\
-    factory.use(GraphQLUnionType) → Factory<br>\
-    factory.use(GraphQLInterfaceType) → Factory<br>")
+    h4(id="buildSchema-anchor") buildSchema
+    callout.mono(type="default", html="definition.buildSchema([options]) → Promise<GraphQLSchema>")
     p
-      | Imports definition related things and merges them into the current definition
-    prism.prism-custom(language="javascript", code="const TypesPlugin = new GraphQLFactory.plugins.Types()\n\factory\n\
-    .use(definition)\n\
-    .use(TypesPlugin)")
-    hr.sub-title
-
-    h4.sub-title library
-    callout.mono(type="default", html="factory.library([generateOptions]) → Library")
+      | Creates a new <code>GraphQLSchema</code> from the current <code>SchemaDefinition</code>
+      | and adds the definition as a property on the schema along with a custom <code>request</code>
+      | method that returns results with extensions
+    prism.prism-custom(language="javascript", code=`const schema = await new SchemaDefinition()
+    .use(definition)
+    .buildSchema();
+  
+  const result = await schema.request({
+    source: 'query FooQuery { listFoo { bar } }'
+  });`)
     p
-      | Generates a new <code>Library</code> instance. Can optionally merge schemas into a single schema
-    prism.prism-custom(language="javascript", code="factory\n\
-    .use(definition)\n\
-    .library({\n\
-      mergeSchemas: 'root'\n\
-    })")
-    hr.sub-title
-
-    h4.sub-title before
-    callout.mono(type="default", html="factory.before(middleware[, middlewareOptions]) → Library")
-    p
-      | Adds a before middleware to the current definition. Before middleware is run before the
-      | resolve function
-    prism.prism-custom(language="javascript", code="factory\n\
-    .before((req, res, next) => {\n\
-      const { args } = req\n\
-      args.requested = Date.now()\n\
-      return next()\n\
-    })")
-    hr.sub-title
-
-    h4.sub-title after
-    callout.mono(type="default", html="factory.after(middleware[, middlewareOptions]) → Library")
-    p
-      | Adds an after middleware to the current definition. After middleware is run after the
-      | resolve function and has access to the result via <code>req.result</code>
-    prism.prism-custom(language="javascript", code="factory\n\
-    .after((req, res, next) => {\n\
-      const { result } = req\n\
-      result.password = '*****'\n\
-      return next()\n\
-    })")
-    hr.sub-title
-
-    h4.sub-title error
-    callout.mono(type="default", html="factory.error(middleware[, middlewareOptions]) → Library")
-    p
-      | Adds an error middleware to the current definition. Error middleware is run in the event
-      | an <code>after</code>, <code>before</code>, or <code>resolve</code> encounters an error
-      | or if <code>next</code> was called with an error. It
-      | has access to the error via <code>req.error</code>
-    prism.prism-custom(language="javascript", code="factory\n\
-    .error((req, res, next) => {\n\
-      req.error = new Error('Error:' + req.error.message)\n\
-      return next()\n\
-    })")
-    hr.sub-title
-
-    h4.sub-title Definition
-    callout.mono(type="default", html="GraphQLFactory.Definition([factory]) → Definition")
-    p
-      | Creates a new empty GraphQL Factory <code>Definition</code>
-    prism.prism-custom(language="javascript", code="const definition = new GraphQLFactory.Definition()")
-    hr.sub-title
-    h4.sub-title Decomposer
-    callout.mono(type="default", html="GraphQLFactory.Decomposer() → Decomposer")
-    p
-      | Creates a new empty GraphQL Factory <code>Decomposer</code> capable of decomposing native graphql
-      | types into factory definitions
-    prism.prism-custom(language="javascript", code="const decomposer = new GraphQLFactory.Decomposer()")
-    hr.sub-title
+    h6 parameters
+    table.table.table-bordered.table-sm.table-responsive-sm.mono
+      thead.thead-light
+        tr
+          th(scope="col") Name
+          th(scope="col") Type
+          th(scope="col") Default
+          th(scope="col") Description
+      tbody
+        tr
+          td [options.useMiddleware]
+          td <code>boolean</code>
+          td true
+          td Wraps each resolver function in middleware that merges the definition context into the execution context
+        tr
+          td [options.factoryExecution]
+          td <code>boolean</code>
+          td true
+          td Uses a custom execution which supports directive resolvers and execution tracing
 </template>
 
 <script type="text/babel">
@@ -121,10 +153,14 @@
   }
   hr.sub-title {
     margin-top: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 90px;
   }
   .mono {
     font-family: monospace;
     font-size: 1em !important;
+  }
+  .properties {
+    list-style: none;
+    padding-left: 0px;
   }
 </style>

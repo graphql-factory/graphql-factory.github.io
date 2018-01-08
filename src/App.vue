@@ -67,3 +67,15 @@
     }
   }
 </script>
+
+<style>
+html, body, #app {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  overflow: hidden;
+}
+</style>
+

@@ -21,6 +21,10 @@
   list-style: none;
   padding: 0px;
 }
+i.fa {
+  max-width: 47px;
+  margin-bottom: 15px;
+}
 i.fa.fa-twitter {
   color: #00aced;
 }

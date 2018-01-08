@@ -1,19 +1,21 @@
 <template lang="pug">
   .full-viewport
     #top-nav(ref="topNav", :class="`theme-${theme}`")
-      nav.navbar.navbar-expand-lg
+      nav.navbar
         a.navbar-brand(@click="toggleLeftMenu")
           svg.toggler(width='24px', height='24px', viewBox='0 0 48 30')
             path(d='M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z')
-        span.nav-text.noselect GraphQL Factory
-        span.nav-delimiter.noselect |
-        span.nav-text.noselect {{$route.meta.title}}
+          span.nav-text &nbsp;&nbsp;&nbsp;GraphQL Factory
+          span.nav-delimiter |
+          span.nav-text {{$route.meta.title}}
+        div
+          img.whiteout(src="../../../assets/graphql-factory.svg", style="width: 30px; margin-right: 10px;")
     #left-nav(ref="leftNav", :style="leftNavStyle")
       ul
         router-link.noselect.grayscale(:to="{ name: 'welcome' }", tag="li", active-class="no-greyscale", exact)
           img(src="../../../assets/graphql-factory.svg", style="width: 30px; margin-right: 10px;")
           span Home
-        router-link.noselect.grayscale(:to="{ name: 'api' }", tag="li", active-class="no-greyscale")
+        router-link.noselect.grayscale(:to="{ name: 'api' }", tag="li", active-class="no-greyscale", exact)
           img(src="../../../assets/icons/api.svg")
           span API
         router-link.noselect.grayscale(to="/learn", tag="li", active-class="no-greyscale")
@@ -46,7 +48,7 @@ import LearnMenu from '@/components/learn/LearnMenu'
 import ApiMenu from '@/components/api/APIMenu'
 import WelcomeLinks from '@/components/welcome/WelcomeLinks'
 
-const MIN_NAV_WIDTH = 40
+const MIN_NAV_WIDTH = 47
 const MAX_LEFT_NAV_WIDTH = 140
 
 export default {
@@ -142,7 +144,7 @@ export default {
 }
 
 #top-nav span.nav-text {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 #top-nav span.nav-delimiter {
@@ -165,8 +167,8 @@ export default {
 #left-nav img {
   width: 28px;
   height: auto;
-  margin-left: 5px;
-  margin-right: 12px;
+  margin-left: 10px;
+  margin-right: 14px;
   cursor: pointer;
 }
 
@@ -175,7 +177,7 @@ export default {
   padding-left: 0px;
 }
 #left-nav li {
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   color: #444;
 }
 
@@ -192,10 +194,11 @@ export default {
   z-index: 1;
   overflow: auto;
   position: absolute;
-  background-color: #eeeeee;
+  background-color: #fdfdfd;
   padding: 15px 0px 15px 0px;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgb(192, 192, 192);
+  border-right: 1px solid rgb(192, 192, 192);
+  transition: .3s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -205,6 +208,11 @@ h1, h2, h3, h4, h5, h6 {
 .no-greyscale {
   -webkit-filter: none !important; /* Safari 6.0 - 9.0 */
   filter: none !important;
+}
+
+.no-greyscale span {
+  font-weight: 600;
+  color: #00A9DD;
 }
 
 .toggler {

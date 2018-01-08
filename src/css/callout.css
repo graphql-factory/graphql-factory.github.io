@@ -20,6 +20,7 @@
 }
 .bs-callout-default {
   border-left-color: #777;
+  background-color: #eee;
 }
 .bs-callout-default h4 {
   color: #777;

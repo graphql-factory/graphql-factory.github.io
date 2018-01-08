@@ -1,5 +1,5 @@
 <template lang="pug">
-  .container.text-left
+  .container-fluid.text-left
     p
       | There are currently no tutorials. Try back later!
 </template>

@@ -5,6 +5,8 @@ body {
   font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
   background-color: #e5e5e5;
   color: #333;
+  width: 100%;
+  overflow: hidden;
 }
 
 input:focus, a:focus, button:focus, select:focus {
@@ -128,4 +130,16 @@ label:focus,
 .next-section h4 {
   margin-top: 5px;
   text-align: left;
+}
+
+.whiteout {
+  filter: brightness(0) invert(1);
+}
+
+.blackout {
+  filter: brightness(0);
+}
+
+.menu-nav-content {
+  min-width: 220px;
 }

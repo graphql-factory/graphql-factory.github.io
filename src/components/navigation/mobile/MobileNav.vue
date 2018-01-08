@@ -1,6 +1,6 @@
 <template lang="pug">
-  div
-    #top-nav(ref="topNav", class="theme-white")
+  div(style="overflow: hidden;")
+    #top-nav(ref="topNav", :class="`theme-${$route.meta.theme}`", style="padding-top: 5px;padding-bottom: 5px;")
       nav.navbar.navbar-expand-lg
         .container-fluid
           ul.nav.navbar-nav
@@ -9,42 +9,44 @@
                 path(d='M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z')
           ul.nav.navbar-nav.mx-auto
             li.nav-item
-              span(style='line-height: 100%;') {{$route.meta.title}}
+              span(style='line-height: 100%;font-weight: 600;') {{$route.meta.title}}
           ul.nav.navbar-nav
             li.nav-item
-              img.logo(src="../../../assets/graphql-factory.svg")
-    #content(:style="contentStyle")
-      router-view
-    #overlay-menu
-      ul
-        router-link.noselect.grayscale(:to="{ name: 'welcome' }", tag="li", active-class="no-greyscale", exact)
-          img(src="../../../assets/graphql-factory.svg", style="width: 30px; margin-right: 10px;")
-          span Home
-        router-link.noselect.grayscale(:to="{ name: 'api' }", tag="li", active-class="no-greyscale")
-          img(src="../../../assets/icons/api.svg")
-          span API
-        router-link.noselect.grayscale(to="/learn", tag="li", active-class="no-greyscale")
-          img(src="../../../assets/icons/learning.svg")
-          span Learn
-        router-link.noselect.grayscale(to="/tutorials", tag="li", active-class="no-greyscale")
-          img(src="../../../assets/icons/tutorials.svg")
-          span Tutorials
-        router-link.noselect.grayscale(to="/directives", tag="li", active-class="no-greyscale")
-          img(src="../../../assets/icons/directive.svg")
-          span Directives
-        router-link.noselect.grayscale(to="/plugins", tag="li", active-class="no-greyscale")
-          img(src="../../../assets/icons/plugins.svg")
-          span Plugins
-        router-link.noselect.grayscale(to="/designer", tag="li", active-class="no-greyscale")
-          img(src="../../../assets/icons/design.svg")
-          span Designer
-      hr
-      welcome-links(v-if="rightNavContent === 'welcome'")
-      learn-menu(v-if="rightNavContent === 'learn'")
-      api-menu(v-if="rightNavContent === 'api'")
+              img.logo.whiteout(src="../../../assets/graphql-factory.svg")
+    #content(ref="content", :style="contentStyle")
+      div(ref="inner")
+        router-view
+    #overlay-menu(:style="overlayStyle")
+      .menu-content
+        .main-links
+          router-link.noselect.grayscale(:to="{ name: 'welcome' }", active-class="no-greyscale", exact)
+            img(src="../../../assets/graphql-factory.svg", style="width: 30px; margin-right: 10px;")
+            span Home
+          router-link.noselect.grayscale(:to="{ name: 'api' }", active-class="no-greyscale")
+            img(src="../../../assets/icons/api.svg")
+            span API
+          router-link.noselect.grayscale(to="/learn", active-class="no-greyscale")
+            img(src="../../../assets/icons/learning.svg")
+            span Learn
+          router-link.noselect.grayscale(to="/tutorials", active-class="no-greyscale")
+            img(src="../../../assets/icons/tutorials.svg")
+            span Tutorials
+          router-link.noselect.grayscale(to="/directives", active-class="no-greyscale")
+            img(src="../../../assets/icons/directive.svg")
+            span Directives
+          router-link.noselect.grayscale(to="/plugins", active-class="no-greyscale")
+            img(src="../../../assets/icons/plugins.svg")
+            span Plugins
+          router-link.noselect.grayscale(to="/designer", active-class="no-greyscale")
+            img(src="../../../assets/icons/design.svg")
+            span Designer
+        welcome-links(v-if="rightNavContent === 'welcome'")
+        learn-menu(v-if="rightNavContent === 'learn'")
+        api-menu(v-if="rightNavContent === 'api'")
 </template>
 
 <script type="text/babel">
+import { mapGetters } from 'vuex'
 import LearnMenu from '@/components/learn/LearnMenu'
 import ApiMenu from '@/components/api/APIMenu'
 import WelcomeLinks from '@/components/welcome/WelcomeLinks'
@@ -60,12 +62,21 @@ export default {
     })
   },
   computed: {
+    ...mapGetters([
+      'dimensions'
+    ]),
     rightNavContent () {
       return this.$route.name.split('.')[0]
     },
     contentStyle () {
       return {
-        left: this.showMenu ? '90%' : '0px'
+        left: this.showMenu ? `${this.dimensions.windowWidth * 0.7}px` : '0px',
+        height: this.dimensions.windowHeight + 'px'
+      }
+    },
+    overlayStyle () {
+      return {
+        height: `${this.dimensions.windowHeight}px`
       }
     }
   },
@@ -85,31 +96,50 @@ export default {
   top: 0px;
   left: 0px;
   width: 100%;
+  transition: .5s ease;
 }
 
 #content {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  z-index: 1;
-  background-color: #fafafa;
-  padding-top: 60px;
-  transition: .3s ease;
-}
-
-#overlay-menu {
-  overflow: auto;
-  background-color: #e5e5e5;
-  z-index: 0;
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   bottom: 0px;
   right: 0px;
-  padding-top: 60px;
+  width: 100%;
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  z-index: 1;
+  background-color: #fafafa;
+  margin-top: 57px;
+  padding-top: 10px;
+  transition: .3s ease;
+}
+
+#overlay-menu {
+  background-color: #e5e5e5;
+  z-index: 0;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  padding-top: 56px;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
+}
+
+.main-links {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(192, 192, 192);
+  background-color: rgb(240, 240, 240);
+}
+
+#overlay-menu a {
+  display: block;
+  margin-bottom: 10px;
+  margin-left: 7px;
 }
 
 #overlay-menu img {
@@ -125,7 +155,7 @@ export default {
   padding-left: 0px;
 }
 #overlay-menu li {
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   color: #444;
 }
 

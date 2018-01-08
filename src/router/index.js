@@ -297,7 +297,16 @@ router.beforeEach(function (to, from, next) {
 
 router.afterEach(function () {
   setTimeout(() => {
+    const route = router.app.$route
     hub.$emit('route.change')
+
+    if (route.hash) {
+      const id = route.hash.replace(/^#/, '')
+      const el = document.getElementById(`${id}-anchor`)
+      if (el) el.scrollIntoView(true)
+    } else {
+      document.getElementById('content').scrollTo(0, 0)
+    }
   })
 })
 

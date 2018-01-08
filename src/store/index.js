@@ -24,7 +24,9 @@ const state = {
     topNav: 0,
     bottomNav: 0
   },
-  persistent: {}
+  persistent: {
+    showLeftMenu: false
+  }
 }
 
 const mutations = {

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .link-menu.text-left
+  .link-menu.text-left.menu-nav-content
     p
     ul
       li(style="color: #000; font-weight: 300;")
