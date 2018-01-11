@@ -15,7 +15,7 @@
         router-link.noselect.grayscale(:to="{ name: 'welcome' }", tag="li", active-class="no-greyscale", exact)
           img(src="../../../assets/graphql-factory.svg", style="width: 30px; margin-right: 10px;")
           span Home
-        router-link.noselect.grayscale(:to="{ name: 'api' }", tag="li", active-class="no-greyscale", exact)
+        router-link.noselect.grayscale(:to="{ name: 'api' }", tag="li", active-class="no-greyscale")
           img(src="../../../assets/icons/api.svg")
           span API
         router-link.noselect.grayscale(to="/learn", tag="li", active-class="no-greyscale")

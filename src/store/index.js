@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import { extendMutation } from 'vue-deepset'
 
 Vue.use(Vuex)
 
@@ -26,10 +27,11 @@ const state = {
   },
   persistent: {
     showLeftMenu: false
-  }
+  },
+  menuState: {}
 }
 
-const mutations = {
+const mutations = extendMutation({
   [SET_MOBILE]: (state, isMobile) => {
     state.isMobile = isMobile
   },
@@ -46,7 +48,7 @@ const mutations = {
       ? show
       : !state.persistent.showLeftMenu
   }
-}
+})
 
 const actions = {
   setMobile: ({ commit }, isMobile) => {

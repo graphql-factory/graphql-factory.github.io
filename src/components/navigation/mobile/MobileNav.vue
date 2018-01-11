@@ -71,7 +71,7 @@ export default {
     contentStyle () {
       return {
         left: this.showMenu ? `${this.dimensions.windowWidth * 0.7}px` : '0px',
-        height: this.dimensions.windowHeight + 'px'
+        height: `${this.dimensions.windowHeight - 57}px`
       }
     },
     overlayStyle () {
@@ -101,7 +101,7 @@ export default {
 
 #content {
   position: fixed;
-  top: 0px;
+  top: 57px;
   left: 0px;
   bottom: 0px;
   right: 0px;
@@ -111,8 +111,8 @@ export default {
   overflow-x: hidden;
   z-index: 1;
   background-color: #fafafa;
-  margin-top: 57px;
   padding-top: 10px;
+  padding-bottom: 30px;
   transition: .3s ease;
 }
 

@@ -20,7 +20,7 @@
     prism.prism-custom(language="javascript", code=`import { SchemaDefinition } from 'graphql-factory';
   const definition = await new SchemaDefinition();`)
     p
-    h5 <code>parameters</code>
+    h5 Parameters
     table.table.table-bordered.table-sm.table-responsive-sm.mono
       thead.thead-light
         tr
@@ -39,7 +39,15 @@
           td <code>function</code>
           td DefaultConflictResolutionFn
           td Allows a custom conflict resolution function for merge conflicts
-    h5 <code>properties</code>
+    h5(id="SchemaDefinition.definition-anchor")  SchemaDefinition.definition
+    p Returns a <code>Promise</code> that resolves any pending asynchronous code and returns the <code>SchemaDefinition</code>
+    table.table.table-bordered.table-sm.table-responsive-sm.mono
+      tbody
+        tr
+          td.table-cell-light Returns
+          td
+            code Promise&lt;SchemaDefinition&gt;
+
     table.table.table-bordered.table-sm.table-responsive-sm.mono
       thead.thead-light
         tr
@@ -148,6 +156,10 @@
 </script>
 
 <style scoped>
+  .table-cell-light {
+    background-color: #e9ecef;
+    font-weight: 600;
+  }
   h4.sub-title {
     margin-top: 30px;
   }

@@ -5,10 +5,12 @@ import App from './App'
 import router from './router'
 import store from './store'
 import hub from './hub'
+import * as VueDeepset from 'vue-deepset'
 import 'prismjs/themes/prism.css'
 import './css/style.css'
 
 Vue.config.productionTip = false
+Vue.use(VueDeepset)
 
 // add the hub as a plugin
 Vue.prototype.$hub = hub

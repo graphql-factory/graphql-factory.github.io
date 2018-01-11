@@ -1,64 +1,78 @@
 <template lang="pug">
   .link-menu.text-left.menu-nav-content
     p
-    ul
-      li(style="color: #000; font-weight: 300;")
-        b Learn v3.0.0
-    ul(v-for="(section, sIdx) in menuItems", :key="sIdx")
-      router-link(v-for="(link, lIdx) in section",
-      :key="lIdx",
-      tag="li",
-      :to="{ name: link.name }",
-      active-class="active",
-      v-text="link.meta.title", exact)
+    tree.learn-menu(ref="menu", :config="config", :state="state")
 </template>
 
 <script type="text/babel">
-  import _ from '../../common/litedash'
-  export default {
-    computed: {
-      menuItems () {
-        const learn = _.get(this.$router, 'options.routes').filter(route => {
-          return route.path === '/learn'
-        })
-        return _.get(learn, '0.children', []).reduce((accum, item) => {
-          const section = _.get(item, 'meta.section')
-          if (section) {
-            accum.push([item])
-          } else {
-            accum[accum.length - 1].push(item)
-          }
-          return accum
-        }, [])
+import Tree from '../tree/Tree'
+import config from '../../data/learn/menu'
+import _ from '../../common/litedash'
+export default {
+  components: {
+    Tree
+  },
+  data () {
+    return {
+      config,
+      state: {
+        items: {
+          0: { open: true },
+          1: { open: true },
+          2: { open: true },
+          3: { open: true },
+          4: { open: true },
+          5: { open: true },
+          6: { open: true }
+        }
       }
     }
+  },
+  computed: {
+    menuItems () {
+      const learn = _.get(this.$router, 'options.routes').filter(route => {
+        return route.path === '/learn'
+      })
+      return _.get(learn, '0.children', []).reduce((accum, item) => {
+        const section = _.get(item, 'meta.section')
+        if (section) {
+          accum.push([item])
+        } else {
+          accum[accum.length - 1].push(item)
+        }
+        return accum
+      }, [])
+    }
   }
+}
 </script>
 
-<style scoped>
-  .link-menu > ul {
-    list-style: none;
-    padding-right: 40px;
-  }
-  .link-menu > ul > li {
-    font-size: 0.9em;
-    cursor: pointer;
-    border-left: 3px solid #5bafdb;
-  }
+<style>
+.learn-menu {
+  margin-left: 5px;
+}
 
-  .link-menu > ul > li:first-child {
-    color: #5bafdb;
-    font-weight: 600;
-    border-left: none;
-  }
+.learn-menu .vue-tree-item-content {
+  font-size: 0.8em;
+  font-family: consolas,"Liberation Mono",courier,monospace;
+}
 
-  .link-menu > ul > li:not(:first-child):before {
-    content: "\00a0 ";
-  }
+.learn-menu .vue-tree-item-depth-1 {
+  color: #3f87a6;
+  font-weight: 600;
+}
 
-  li.active {
-    color: #5bafdb;
-    display: list-item;
-    list-style: disc outside;
-  }
+.learn-menu .vue-tree-item-depth-2 {
+  color: #555;
+  font-weight: 600;
+}
+
+.learn-menu .vue-tree-item-depth-3, .learn-menu .vue-tree-item-depth-3 a {
+  color: #3f87a6;
+}
+
+.learn-menu .vue-tree li {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
 </style>
