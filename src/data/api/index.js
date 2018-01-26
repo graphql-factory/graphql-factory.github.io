@@ -1,1 +1,5 @@
-export default {}
+import schemaDefinition from './SchemaDefinition/index'
+
+export default {
+  schemaDefinition
+}

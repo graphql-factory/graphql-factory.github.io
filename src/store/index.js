@@ -28,6 +28,7 @@ const state = {
   persistent: {
     showLeftMenu: false
   },
+  apiMenuState: {},
   menuState: {}
 }
 
@@ -70,7 +71,8 @@ const getters = {
   showMobileMenu: state => state.showMobileMenu,
   dimensions: state => state.dimensions,
   showLeftMenu: state => state.persistent.showLeftMenu,
-  algolia: state => state.algolia
+  algolia: state => state.algolia,
+  apiMenuState: state => state.apiMenuState
 }
 
 export default new Vuex.Store({

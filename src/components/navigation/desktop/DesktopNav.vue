@@ -9,7 +9,7 @@
           span.nav-delimiter |
           span.nav-text {{$route.meta.title}}
         div
-          img.whiteout(src="../../../assets/graphql-factory.svg", style="width: 30px; margin-right: 10px;")
+          img.whiteout(src="../../../assets/graphql-factory.svg", style="width: 30px; margin-right: -5px;")
     #left-nav(ref="leftNav", :style="leftNavStyle")
       ul
         router-link.noselect.grayscale(:to="{ name: 'welcome' }", tag="li", active-class="no-greyscale", exact)

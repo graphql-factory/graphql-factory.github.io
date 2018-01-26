@@ -1,39 +1,34 @@
 <template lang="pug">
   .link-menu.text-left.menu-nav-content
     p
-    tree.api-menu(ref="menu", :config="config", :state="state")
+    tree.api-menu(ref="menu", :config="config", state="apiMenuState", :hub="hub")
 </template>
 
 <script type="text/babel">
 import Tree from '../tree/Tree'
 import config from '../../data/api/menu'
+import { mapGetters } from 'vuex'
+import hub from '../../hub'
 export default {
   components: {
     Tree
   },
+  computed: {
+    ...mapGetters([
+      'apiMenuState'
+    ])
+  },
+  created () {
+    if (!Object.keys(this.apiMenuState).length) {
+      this.$nextTick(() => {
+        this.hub.$emit('tree.expand.all')
+      })
+    }
+  },
   data () {
     return {
       config,
-      state: {
-        items: {
-          '0': {
-            open: true,
-            items: {
-              '3': {
-                open: true
-              }
-            }
-          },
-          '1': {
-            open: true,
-            items: {
-              '2': {
-                open: true
-              }
-            }
-          }
-        }
-      }
+      hub
     }
   }
 }
@@ -42,7 +37,7 @@ export default {
 
 <style>
 .api-menu {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .api-menu .vue-tree-item-content {

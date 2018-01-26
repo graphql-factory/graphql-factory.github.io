@@ -7,47 +7,33 @@
     | imported into a project.
     callout(type="info", html="Please note that the examples here use ES7 syntax which may \
     require a library like <a href=https://babeljs.io/ target=_blank>babel.js</a>")
-    h4.sub-title(id="SchemaDefinition-anchor") SchemaDefinition <code>extends</code> EventEmitter
-    callout.mono(type="default", html="new SchemaDefinition(options) → SchemaDefinition")
-    p
-      | Constructs a schema definition in GraphQL Factory Definition Format. Merges all inputs/imports
-      | into a single definition with customizable merge conflict resolution. Extends the standard
-      | EventEmitter class and emits events during build and execution.
-    callout(type="warning", html="The <code>SchemaDefinition</code> class builds the definition \
-    asynchronously and should be resolved before attempting to access its properties. \
-    This can be done by resolving the <code>definition</code> property,\
-    the <code>buildSchema</code> method, or the <code>use</code> method with no arguments.")
-    prism.prism-custom(language="javascript", code=`import { SchemaDefinition } from 'graphql-factory';
-  const definition = await new SchemaDefinition();`)
-    p
-    h5 Parameters
+    h4.weak SchemaDefinition
+    p A class for iteratively building a schema definition in GraphQL Factory Definition Format which can be exported in various formats and used to construct a GraphQLSchema
+    h4.weak SchemaBacking
+    p A class for iteratively building a backing object which contains functions that can be mapped to a schema build using schema language
+    hr
+    api-topic(v-for="(config, name) in apiData", :key="name", :config="config")
+    hr
+
+    b.mono options
+    grid.table.table-bordered.table-sm.table-responsive-sm.mono(:config="gcfg")
     table.table.table-bordered.table-sm.table-responsive-sm.mono
       thead.thead-light
         tr
           th(scope="col") Name
           th(scope="col") Type
-          th(scope="col") Default
           th(scope="col") Description
       tbody
         tr
-          td [options.noDefaultTypes]
+          td [noDefaultTypes=false]
           td <code>boolean</code>
-          td false
           td Prevents <code>JSON</code> and <code>DateTime</code> types from being automatically added to the definition
         tr
-          td [options.onConflict]
+          td [onConflict]
           td <code>function</code>
-          td DefaultConflictResolutionFn
           td Allows a custom conflict resolution function for merge conflicts
-    h5(id="SchemaDefinition.definition-anchor")  SchemaDefinition.definition
-    p Returns a <code>Promise</code> that resolves any pending asynchronous code and returns the <code>SchemaDefinition</code>
-    table.table.table-bordered.table-sm.table-responsive-sm.mono
-      tbody
-        tr
-          td.table-cell-light Returns
-          td
-            code Promise&lt;SchemaDefinition&gt;
-
+    h5 Properties
+    p
     table.table.table-bordered.table-sm.table-responsive-sm.mono
       thead.thead-light
         tr
@@ -83,8 +69,8 @@
           td version
           td <code>string</code>
           td <code>SchemaDefinition</code> version in semver format
-
-    h5 <code>events</code>
+    p
+    h5 Events
     table.table.table-bordered.table-sm.table-responsive-sm.mono
       thead.thead-light
         tr
@@ -92,24 +78,23 @@
           th(scope="col") Data
           th(scope="col") Description
       tbody
-        tr
+        tr(id="SchemaDefinition.events.error-anchor")
           td error
           td <code>Error</code>
           td Error thrown from the definition or execution
-        tr
+        tr(id="SchemaDefinition.events.warn-anchor")
           td warn
           td <code>*</code>
           td Warning data
-        tr
+        tr(id="SchemaDefinition.events.info-anchor")
           td info
           td <code>*</code>
           td Informational data
-        tr
+        tr(id="SchemaDefinition.events.execution-anchor")
           td execution
           td <code>ExecutionTrace</code>
           td An object containing the complete execution tracing details
-    hr.sub-title
-    h4(id="buildSchema-anchor") buildSchema
+    h4(id="buildSchema-anchor") buildSchema( )
     callout.mono(type="default", html="definition.buildSchema([options]) → Promise<GraphQLSchema>")
     p
       | Creates a new <code>GraphQLSchema</code> from the current <code>SchemaDefinition</code>
@@ -146,11 +131,41 @@
 
 <script type="text/babel">
   import Prism from 'vue-prismjs'
+  import apiData from '@/data/api'
+  import ApiTopic from '@/components/api/ApiTopic'
   import Callout from '../common/Callout'
+  import Grid from '../common/Grid'
   export default {
     components: {
+      ApiTopic,
       Prism,
-      Callout
+      Callout,
+      Grid
+    },
+    data () {
+      return {
+        apiData,
+        gcfg: {
+          headClass: 'thead-light',
+          headers: [
+            { title: 'Name' },
+            { title: 'Type' },
+            { title: 'Description' }
+          ],
+          rows: [
+            [
+              '[noDefaultTypes=false]',
+              '<code>boolean</code>',
+              'Prevents <code>JSON</code> and <code>DateTime</code> types from being automatically added to the definition'
+            ],
+            [
+              '[onConflict]',
+              '<code>function</code>',
+              'Allows a custom conflict resolution function for merge conflicts'
+            ]
+          ]
+        }
+      }
     }
   }
 </script>
@@ -167,12 +182,11 @@
     margin-top: 30px;
     margin-bottom: 90px;
   }
-  .mono {
-    font-family: monospace;
-    font-size: 1em !important;
-  }
   .properties {
     list-style: none;
     padding-left: 0px;
+  }
+  .weak {
+    font-weight: 400;
   }
 </style>

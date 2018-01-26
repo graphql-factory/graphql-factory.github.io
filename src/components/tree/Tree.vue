@@ -6,12 +6,15 @@
       :path="`items.${idx}`",
       :config="item",
       :root-config="config",
-      :state="_state"
+      :state="_state",
+      :hub="hub"
     )
 </template>
 
 <script type="text/babel">
 import TreeItem from './TreeItem'
+import Vue from 'vue'
+
 export default {
   components: {
     TreeItem
@@ -26,13 +29,40 @@ export default {
       default () {
         return {}
       }
+    },
+    hub: {
+      type: Object,
+      default () {
+        return new Vue()
+      }
     }
+  },
+  created () {
+    this.hub
+    .$on('tree.expand.all', () => {
+      this.setAll(true)
+    })
+    .$on('tree.collapse.all', () => {
+      this.setAll(false)
+    })
   },
   computed: {
     _state () {
-      return this.$deepModel(this.state, {
-        dynamicUpdates: this.config.dynamicUpdates
-      })
+      return this.$deepModel(this.state)
+    }
+  },
+  methods: {
+    setAll (value = true) {
+      const expand = (cnf, path) => {
+        if (typeof cnf === 'object' && cnf && Array.isArray(cnf.items)) {
+          cnf.items.forEach((item, index) => {
+            const p = `${path}["${index}"]`
+            this._state[`${p}.open`] = value
+            expand(item, `${p}.items`)
+          })
+        }
+      }
+      expand(this.config, 'items')
     }
   }
 }

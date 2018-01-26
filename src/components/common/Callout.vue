@@ -3,27 +3,35 @@
 </template>
 
 <script type="text/babel">
-  export default {
-    name: 'callout',
-    props: {
-      type: {
-        type: String,
-        default: 'primary'
-      },
-      html: String
+import _ from '../../common/litedash'
+export default {
+  name: 'callout',
+  props: {
+    type: {
+      type: String,
+      default: 'primary'
     },
-    computed: {
-      markup () {
-        return this.html.replace(/```(\S+)```/g, '<code>$1</code>')
-      },
-      clazz () {
-        return [
-          `bs-callout-${this.type}`,
-          `alert-${this.type}`
-        ]
+    html: String,
+    config: {
+      type: Object,
+      default () {
+        return {}
       }
     }
+  },
+  computed: {
+    markup () {
+      return this.html.replace(/```(\S+)```/g, '<code>$1</code>')
+    },
+    clazz () {
+      return _.get(this.config, 'class', [])
+      .concat([
+        `bs-callout-${this.type}`,
+        `alert-${this.type}`
+      ])
+    }
   }
+}
 </script>
 
 <style scoped>

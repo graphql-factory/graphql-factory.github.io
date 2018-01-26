@@ -3,7 +3,6 @@ export default {
     return item.depth === 2 ? '0px' : '1em'
   },
   recursiveClose: true,
-  dynamicUpdates: false,
   bullets: {
     open: '<i class="fa fa-caret-down fa-fw"></i>',
     closed: '<i class="fa fa-caret-right fa-fw"></i>',
@@ -12,13 +11,14 @@ export default {
   items: [
     {
       content: 'SchemaDefinition',
+      route: { name: 'api.schemadefinition' },
       items: [
         {
           content: 'Constructor',
           items: [
             {
               content: 'SchemaDefinition()',
-              route: { name: 'api', hash: '#SchemaDefinition' }
+              route: { name: 'api.schemadefinition' }
             }
           ]
         },
@@ -30,22 +30,28 @@ export default {
               route: { name: 'api', hash: '#SchemaDefinition.definition' }
             },
             {
-              content: 'context'
+              content: 'context',
+              route: { name: 'api', hash: '#SchemaDefinition.context' }
             },
             {
-              content: 'functions'
+              content: 'functions',
+              route: { name: 'api', hash: '#SchemaDefinition.functions' }
             },
             {
-              content: 'directives'
+              content: 'directives',
+              route: { name: 'api', hash: '#SchemaDefinition.directives' }
             },
             {
-              content: 'types'
+              content: 'types',
+              route: { name: 'api', hash: '#SchemaDefinition.types' }
             },
             {
-              content: 'schema'
+              content: 'schema',
+              route: { name: 'api', hash: '#SchemaDefinition.schema' }
             },
             {
-              content: 'version'
+              content: 'version',
+              route: { name: 'api', hash: '#SchemaDefinition.version' }
             }
           ]
         },
@@ -53,16 +59,20 @@ export default {
           content: 'Events',
           items: [
             {
-              content: 'error'
+              content: 'error',
+              route: { name: 'api', hash: '#SchemaDefinition.events.error' }
             },
             {
-              content: 'warn'
+              content: 'warn',
+              route: { name: 'api', hash: '#SchemaDefinition.events.warn' }
             },
             {
-              content: 'info'
+              content: 'info',
+              route: { name: 'api', hash: '#SchemaDefinition.events.info' }
             },
             {
-              content: 'execution'
+              content: 'execution',
+              route: { name: 'api', hash: '#SchemaDefinition.events.execution' }
             }
           ]
         },

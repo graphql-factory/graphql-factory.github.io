@@ -3,8 +3,9 @@
 
 body {
   font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 11pt;
   background-color: #e5e5e5;
-  color: #333;
+  color: #555;
   width: 100%;
   overflow: hidden;
 }
@@ -142,4 +143,9 @@ label:focus,
 
 .menu-nav-content {
   min-width: 220px;
+}
+
+.mono {
+  font-family: monospace;
+  font-size: 1em !important;
 }

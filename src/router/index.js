@@ -6,6 +6,7 @@ import Learn from '@/components/learn/Learn'
 import LearnTopic from '@/components/learn/LearnTopic'
 import API from '@/components/api/API'
 import APIDoc from '@/components/api/APIDoc'
+import ApiClass from '@/components/api/ApiClass'
 
 import Tutorials from '@/components/Tutorials'
 import Plugins from '@/components/Plugins'
@@ -14,7 +15,7 @@ import Designer from '@/components/designer/Designer'
 import Search from '@/components/search/Search'
 import Credits from '@/components/Credits'
 
-import { learn } from '../data'
+import { api, learn } from '../data'
 
 import hub from '../hub'
 
@@ -217,6 +218,16 @@ const router = new Router({
           meta: {
             title: 'API',
             theme: 'carbon'
+          }
+        },
+        {
+          path: 'SchemaDefinition',
+          name: 'api.schemadefinition',
+          component: ApiClass,
+          meta: {
+            title: 'SchemaDefinition',
+            theme: 'carbon',
+            config: api.schemaDefinition
           }
         }
       ]

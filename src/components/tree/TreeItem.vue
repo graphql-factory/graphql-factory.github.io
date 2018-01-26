@@ -13,7 +13,7 @@
     )
     .vue-tree-item-content(
       v-if="!isLeaf",
-      @click="toggleBranch",
+      @click="toggleBranch(config)",
       v-html="config.content || '&nbsp;'",
       :class="`vue-tree-item-depth-${depth}`"
     )
@@ -31,7 +31,8 @@
         :config="item",
         :root-config="rootConfig",
         :state="state",
-        :depth="depth + 1"
+        :depth="depth + 1",
+        :hub="hub"
       )
 </template>
 
@@ -77,9 +78,21 @@ export default {
     depth: {
       type: Number,
       default: 1
+    },
+    hub: {
+      type: Object,
+      required: true
     }
   },
   computed: {
+    open: {
+      get () {
+        return this.state[`${this.path}.open`]
+      },
+      set (value) {
+        this.state[`${this.path}.open`] = value
+      }
+    },
     branchStyle () {
       return {
         'padding-left': this.config.indent
@@ -135,18 +148,16 @@ export default {
     }
   },
   methods: {
-    toggleBranch () {
+    toggleBranch (config) {
       const openPath = `${this.path}.open`
+      if (config && config.route && this.$router) {
+        return this.$router.push(config.route)
+      }
       if (this.isLeaf) return
       this.open = this.state[openPath] = !this.state[openPath]
       if (!this.open && this.rootConfig.recursiveClose !== false) {
         recursiveClose(this.state, this.path)
       }
-    }
-  },
-  data () {
-    return {
-      open: this.state[`${this.path}.open`]
     }
   }
 }
@@ -159,5 +170,6 @@ ul {
 
 .vue-tree-item-bullet, .vue-tree-item-content {
   display: inline-block;
+  cursor: pointer;
 }
 </style>
