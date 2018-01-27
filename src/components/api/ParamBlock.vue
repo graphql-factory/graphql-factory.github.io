@@ -1,8 +1,10 @@
 <template lang="pug">
   div
-    b.property.mono {{text}}
-    ul(v-if="children")
-      param-block-child(v-for="(child, index) in children", :key="index", :config="child")
+    b.property.mono(v-html="name + ' '") 
+    code(v-if="config.type", v-html="'{' + config.type + '} '")
+    span(v-if="config.description", v-html="' - ' + config.description")
+    ul(v-if="config.children")
+      param-block-child(v-for="(child, index) in config.children", :key="index", :config="child")
 </template>
 
 <script type="text/babel">
@@ -11,7 +13,19 @@ export default {
   components: {
     ParamBlockChild
   },
-  props: ['text', 'children']
+  computed: {
+    defaultValue () {
+      return this.config.defaultValue !== undefined
+        ? `=${this.config.defaultValue}`
+        : ''
+    },
+    name () {
+      return this.config.optional === true
+        ? `[${this.config.name}${this.defaultValue}]`
+        : `${this.config.name}${this.defaultValue}`
+    }
+  },
+  props: ['config']
 }
 </script>
 

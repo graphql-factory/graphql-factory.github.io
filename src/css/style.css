@@ -149,3 +149,7 @@ label:focus,
   font-family: monospace;
   font-size: 1em !important;
 }
+
+.api-class a {
+  color:#3f87a6;
+}

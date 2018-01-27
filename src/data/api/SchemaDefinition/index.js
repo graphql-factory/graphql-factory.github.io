@@ -85,44 +85,180 @@ const definition = new SchemaDefinition();`
       description: 'Execution tracing data for a request'
     }
   ],
-  content: [
+  methods: [
     {
-      component: 'heading',
-      config: { type: 'h4', anchor: 'SchemaDefinition' },
-      html: '<i>class</i> SchemaDefinition <code>extends</code> EventEmitter'
+      name: 'buildSchema',
+      description: 'Builds a GraphQLSchema from the SchemaDefinition, and extends it with a request method and the schema itself',
+      signature: 'buildSchema([options]) → Promise&lt;GraphQLSchema&gt;',
+      params: [
+        {
+          name: 'options',
+          children: [
+            {
+              name: 'useMiddleware',
+              optional: true,
+              defaultValue: true,
+              type: 'boolean',
+              description: 'When <code>false</code>, field resolve functions will ' +
+              'not be wrapped with middleware. This will remove ' +
+              'directive and instrumentation support'
+            },
+            {
+              name: 'factoryExecution',
+              optional: true,
+              defaultValue: true,
+              type: 'boolean',
+              description: 'When <code>true</code>, uses a custom GraphQL Factory ' +
+              'execution which allows directive middleware support. Requires ' +
+              '<code>useMiddleware</code> to also be true'
+            }
+          ]
+        }
+      ],
+      examples: [
+        {
+          language: 'javascript',
+          code: `const schema = await new SchemaDefinition()
+  .use(definition)
+  .buildSchema();`
+        }
+      ]
     },
     {
-      component: 'paragraph',
-      html: 'Constructs a schema definition in GraphQL Factory Definition ' +
-      'Format. Merges all inputs/imports into a single definition with ' +
-      'customizable merge conflict resolution. Extends the standard ' +
-      'EventEmitter class and emits events during build and execution.'
+      name: 'export',
+      description: 'Exports the <code>SchemaDefinition</code> as an object ' +
+      'containing the Schema Language Definition and a <code>SchemaBacking</code>',
+      signature: 'export() → Promise&lt;Object&gt;',
+      examples: [
+        {
+          language: 'javascript',
+          code: `const { definition, backing } = await new SchemaDefinition()
+  .use(definition)
+  .export();`
+        }
+      ]
     },
     {
-      component: 'callout',
-      type: 'warning',
-      html: 'The ```SchemaDefinition``` class builds the definition ' +
-      'asynchronously and should be resolved before attempting to ' +
-      'access its properties. This can be done by resolving the ' +
-      '```definition``` property, the ```buildSchema``` method, or ' +
-      'the ```use``` method with no arguments.'
+      name: 'merge',
+      description: 'Merges a <code>SchemaDefinition</code> or definition-like object' +
+      'into the current <code>SchemaDefinition</code>',
+      signature: 'merge(definition) → SchemaDefinition',
+      params: [
+        {
+          name: 'definition',
+          optional: false,
+          type: 'SchemaDefinition|Object',
+          description: 'SchemaDefinition or definition-like object to merge'
+        }
+      ],
+      examples: [
+        {
+          language: 'javascript',
+          code: `import FooDefinition from './fooDefinition';
+const definition = new SchemaDefinition()
+  .merge(fooDefinition);`
+        }
+      ]
     },
     {
-      component: 'heading',
-      config: { type: 'h5', anchor: 'SchemaDefinition.constructor' },
-      html: 'Constructor'
+      name: 'omit',
+      description: 'Omits one or more paths from a definition store. ' +
+      'Mutates the <code>SchemaDefinition</code>. This method can be useful ' +
+      'when multiple definitions or plugins have been used in the definition ' +
+      'to eliminate unwanted types, context, functions, etc.',
+      signature: 'omit(store, path1[, path2, ...]) → SchemaDefinition',
+      params: [
+        {
+          name: 'store',
+          optional: false,
+          type: 'string',
+          description: 'Store name to omit fields from'
+        },
+        {
+          name: 'path',
+          optional: false,
+          type: 'string|Array&lt;string&gt;',
+          description: 'lodash formatted string or array paths to omit from the store'
+        }
+      ],
+      examples: [
+        {
+          language: 'javascript',
+          code: `import fooDefinition from './fooDefinition';
+const definition = new SchemaDefinition()
+  .use(fooDefinition)
+  .omit('types', 'Foo', 'Bar')`
+        }
+      ]
     },
     {
-      component: 'callout',
-      type: 'default',
-      config: { class: [ 'mono' ] },
-      html: 'new SchemaDefinition([options]) → SchemaDefinition'
+      name: 'pick',
+      description: 'Picks one or more paths from a definition store and removes the rest. ' +
+      'Mutates the <code>SchemaDefinition</code>. This method can be useful when merging ' +
+      'an existing definition where only some parts of the definition are wanted',
+      signature: 'pick(store, path1[, path2, ...]) → SchemaDefinition',
+      params: [
+        {
+          name: 'store',
+          optional: false,
+          type: 'string',
+          description: 'Store name to pick fields from'
+        },
+        {
+          name: 'path',
+          optional: false,
+          type: 'string|Array&lt;string&gt;',
+          description: 'lodash formatted string or array paths to pick from the store'
+        }
+      ],
+      examples: [
+        {
+          language: 'javascript',
+          code: `import fooDefinition from './fooDefinition';
+const definition = new SchemaDefinition()
+  .use(fooDefinition)
+  .pick('types', 'Foo', 'Bar', 'Query', 'Mutation')`
+        }
+      ]
     },
     {
-      component: 'prism',
-      language: 'javascript',
-      code: `import { SchemaDefinition } from 'graphql-factory';
-const definition = await new SchemaDefinition();`
+      name: 'use',
+      description: 'Adds full or partial definitions to the current <code>SchemaDefinition</code>',
+      signature: `use(SchemaDefinition) → SchemaDefinition<br>
+use(SchemaBacking) → SchemaDefinition<br>
+use(GraphQLSchema[, namePrefix]) → SchemaDefinition<br>
+use(GraphQLDirective[, name]) → SchemaDefinition<br>
+use(GraphQLNamedType[, name]) → SchemaDefinition<br>
+use(GraphQLFactoryPlugin) → SchemaDefinition<br>
+use(graphqlFilePath) → SchemaDefinition<br>
+use(schemaLanguage[, SchemaBacking][, namePrefix]) → SchemaDefinition<br>
+use(Function, name) → SchemaDefinition<br>
+use(definitionLikeObject) → SchemaDefinition<br>
+use() → SchemaDefinition
+`,
+      examples: [
+        {
+          language: 'javascript',
+          code: `import fooDefinition from './fooDefinition';
+const definition = new SchemaDefinition()
+  .use(fooDefinition)`
+        }
+      ]
+    },
+    {
+      name: 'validate',
+      description: 'Validates the <code>SchemaDefinition</code> ' +
+      'structure throwing an Error if invalid',
+      signature: 'validate() → Promise&lt;Object&gt;',
+      examples: [
+        {
+          language: 'javascript',
+          code: `import fooDefinition from './fooDefinition';
+const definition = await new SchemaDefinition()
+  .use(fooDefinition)
+  .validate();`
+        }
+      ]
     }
   ]
 }

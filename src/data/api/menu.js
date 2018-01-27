@@ -27,31 +27,31 @@ export default {
           items: [
             {
               content: 'definition',
-              route: { name: 'api', hash: '#SchemaDefinition.definition' }
+              route: { name: 'api.schemadefinition', hash: '#definition' }
             },
             {
               content: 'context',
-              route: { name: 'api', hash: '#SchemaDefinition.context' }
+              route: { name: 'api.schemadefinition', hash: '#context' }
             },
             {
               content: 'functions',
-              route: { name: 'api', hash: '#SchemaDefinition.functions' }
+              route: { name: 'api.schemadefinition', hash: '#functions' }
             },
             {
               content: 'directives',
-              route: { name: 'api', hash: '#SchemaDefinition.directives' }
+              route: { name: 'api.schemadefinition', hash: '#directives' }
             },
             {
               content: 'types',
-              route: { name: 'api', hash: '#SchemaDefinition.types' }
+              route: { name: 'api.schemadefinition', hash: '#types' }
             },
             {
               content: 'schema',
-              route: { name: 'api', hash: '#SchemaDefinition.schema' }
+              route: { name: 'api.schemadefinition', hash: '#schema' }
             },
             {
               content: 'version',
-              route: { name: 'api', hash: '#SchemaDefinition.version' }
+              route: { name: 'api.schemadefinition', hash: '#version' }
             }
           ]
         },
@@ -60,19 +60,19 @@ export default {
           items: [
             {
               content: 'error',
-              route: { name: 'api', hash: '#SchemaDefinition.events.error' }
+              route: { name: 'api.schemadefinition', hash: '#event.error' }
             },
             {
               content: 'warn',
-              route: { name: 'api', hash: '#SchemaDefinition.events.warn' }
+              route: { name: 'api.schemadefinition', hash: '#event.warn' }
             },
             {
               content: 'info',
-              route: { name: 'api', hash: '#SchemaDefinition.events.info' }
+              route: { name: 'api.schemadefinition', hash: '#event.info' }
             },
             {
               content: 'execution',
-              route: { name: 'api', hash: '#SchemaDefinition.events.execution' }
+              route: { name: 'api.schemadefinition', hash: '#event.execution' }
             }
           ]
         },
@@ -80,25 +80,32 @@ export default {
           content: 'Methods',
           items: [
             {
-              content: 'buildSchema()'
+              content: 'buildSchema()',
+              route: { name: 'api.schemadefinition', hash: '#buildSchema' }
             },
             {
-              content: 'export()'
+              content: 'export()',
+              route: { name: 'api.schemadefinition', hash: '#export' }
             },
             {
-              content: 'merge()'
+              content: 'merge()',
+              route: { name: 'api.schemadefinition', hash: '#merge' }
             },
             {
-              content: 'omit()'
+              content: 'omit()',
+              route: { name: 'api.schemadefinition', hash: '#omit' }
             },
             {
-              content: 'pick()'
+              content: 'pick()',
+              route: { name: 'api.schemadefinition', hash: '#pick' }
             },
             {
-              content: 'use()'
+              content: 'use()',
+              route: { name: 'api.schemadefinition', hash: '#use' }
             },
             {
-              content: 'validate()'
+              content: 'validate()',
+              route: { name: 'api.schemadefinition', hash: '#validate' }
             }
           ]
         }

@@ -1,5 +1,5 @@
 <template lang="pug">
-  .container-fluid.text-left
+  .container-fluid.text-left.api-class
     h3 API Reference
     | GraphQL Factory is a toolkit the provides utilities
     | for building and executing graphql schemas. Only the main utilities are documented
@@ -9,124 +9,18 @@
     require a library like <a href=https://babeljs.io/ target=_blank>babel.js</a>")
     h4.weak SchemaDefinition
     p A class for iteratively building a schema definition in GraphQL Factory Definition Format which can be exported in various formats and used to construct a GraphQLSchema
+    b Example
+    prism(language="javascript", :code="definitionExample")
+    router-link(:to="{ name: 'api.schemadefinition'}") Read more about this class →
+    p
     h4.weak SchemaBacking
     p A class for iteratively building a backing object which contains functions that can be mapped to a schema build using schema language
+    b Example
+    prism(language="javascript", :code="backingExample")
+    router-link(:to="{ name: 'api.schemabacking'}") Read more about this class →
+    p
     hr
-    api-topic(v-for="(config, name) in apiData", :key="name", :config="config")
-    hr
-
-    b.mono options
-    grid.table.table-bordered.table-sm.table-responsive-sm.mono(:config="gcfg")
-    table.table.table-bordered.table-sm.table-responsive-sm.mono
-      thead.thead-light
-        tr
-          th(scope="col") Name
-          th(scope="col") Type
-          th(scope="col") Description
-      tbody
-        tr
-          td [noDefaultTypes=false]
-          td <code>boolean</code>
-          td Prevents <code>JSON</code> and <code>DateTime</code> types from being automatically added to the definition
-        tr
-          td [onConflict]
-          td <code>function</code>
-          td Allows a custom conflict resolution function for merge conflicts
-    h5 Properties
     p
-    table.table.table-bordered.table-sm.table-responsive-sm.mono
-      thead.thead-light
-        tr
-          th(scope="col") Name
-          th(scope="col") Type
-          th(scope="col") Description
-      tbody
-        tr
-          td definition
-          td <code>Promise&lt;SchemaDefinition&gt;</code>
-          td Used to resolve any current asynchronous code on the definition
-        tr
-          td context
-          td <code>object</code>
-          td The custom context value that will be merged into the execution context
-        tr
-          td functions
-          td <code>object</code>
-          td Map of functions that can be referenced by the <code>SchemaDefinition</code>
-        tr
-          td directives
-          td <code>object</code>
-          td Map of directive definitions
-        tr
-          td types
-          td <code>object</code>
-          td Map of type definitions
-        tr
-          td schema
-          td <code>object</code>
-          td schema definition
-        tr
-          td version
-          td <code>string</code>
-          td <code>SchemaDefinition</code> version in semver format
-    p
-    h5 Events
-    table.table.table-bordered.table-sm.table-responsive-sm.mono
-      thead.thead-light
-        tr
-          th(scope="col") Name
-          th(scope="col") Data
-          th(scope="col") Description
-      tbody
-        tr(id="SchemaDefinition.events.error-anchor")
-          td error
-          td <code>Error</code>
-          td Error thrown from the definition or execution
-        tr(id="SchemaDefinition.events.warn-anchor")
-          td warn
-          td <code>*</code>
-          td Warning data
-        tr(id="SchemaDefinition.events.info-anchor")
-          td info
-          td <code>*</code>
-          td Informational data
-        tr(id="SchemaDefinition.events.execution-anchor")
-          td execution
-          td <code>ExecutionTrace</code>
-          td An object containing the complete execution tracing details
-    h4(id="buildSchema-anchor") buildSchema( )
-    callout.mono(type="default", html="definition.buildSchema([options]) → Promise<GraphQLSchema>")
-    p
-      | Creates a new <code>GraphQLSchema</code> from the current <code>SchemaDefinition</code>
-      | and adds the definition as a property on the schema along with a custom <code>request</code>
-      | method that returns results with extensions
-    prism.prism-custom(language="javascript", code=`const schema = await new SchemaDefinition()
-    .use(definition)
-    .buildSchema();
-  
-  const result = await schema.request({
-    source: 'query FooQuery { listFoo { bar } }'
-  });`)
-    p
-    h6 parameters
-    table.table.table-bordered.table-sm.table-responsive-sm.mono
-      thead.thead-light
-        tr
-          th(scope="col") Name
-          th(scope="col") Type
-          th(scope="col") Default
-          th(scope="col") Description
-      tbody
-        tr
-          td [options.useMiddleware]
-          td <code>boolean</code>
-          td true
-          td Wraps each resolver function in middleware that merges the definition context into the execution context
-        tr
-          td [options.factoryExecution]
-          td <code>boolean</code>
-          td true
-          td Uses a custom execution which supports directive resolvers and execution tracing
 </template>
 
 <script type="text/babel">
@@ -144,6 +38,35 @@
     },
     data () {
       return {
+        definitionExample: `import { SchemaDefinition } from 'graphql-factory';
+import fooDefinition from './fooDefinition';
+
+async function main() {
+  const definition = await new SchemaDefinition()
+    .use(fooDefinition);
+
+  const schema = await definition.buildSchema();
+}
+
+main();`,
+        backingExample: `import { SchemaBacking } from 'graphql-factory';
+
+const backing = new SchemaBacking()
+  .Object('Query')
+  .resolve('readFoo', (source, args, context) => {
+    const { db } = context;
+    return db.table('foo').get(args.id);
+  })
+  .resolve('readBar', (source, args, context) => {
+    const { db } = context;
+    return db.table('bar').get(args.id);
+  })
+  .Object('Mutation')
+  .resolve('createFoo', (source, args, context) => {
+    const { db } = context;
+    return db.table('foo').insert(args);
+  })
+  .backing`,
         apiData,
         gcfg: {
           headClass: 'thead-light',
