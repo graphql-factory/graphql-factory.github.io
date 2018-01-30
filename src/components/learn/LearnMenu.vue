@@ -49,7 +49,7 @@ export default {
 
 <style>
 .learn-menu {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .learn-menu .vue-tree-item-content {
@@ -58,16 +58,11 @@ export default {
 }
 
 .learn-menu .vue-tree-item-depth-1 {
-  color: #3f87a6;
-  font-weight: 600;
-}
-
-.learn-menu .vue-tree-item-depth-2 {
   color: #555;
   font-weight: 600;
 }
 
-.learn-menu .vue-tree-item-depth-3, .learn-menu .vue-tree-item-depth-3 a {
+.learn-menu .vue-tree-item-depth-2, .learn-menu .vue-tree-item-depth-2 a {
   color: #3f87a6;
 }
 

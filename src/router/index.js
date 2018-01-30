@@ -49,153 +49,42 @@ const router = new Router({
           name: 'learn',
           component: LearnTopic,
           meta: {
-            title: 'Introduction',
-            config: learn.intro,
+            title: 'Overview',
+            config: learn.overview,
             section: true,
             theme: 'purple'
           }
         },
         {
-          path: 'setup',
-          name: 'learn.setup',
+          path: 'documenting',
+          name: 'learn.documenting',
           component: LearnTopic,
           meta: {
-            title: 'Setup',
-            config: learn.setup,
+            title: 'Documenting',
+            config: learn.documenting,
+            section: false,
             theme: 'purple'
           }
         },
         {
-          path: 'definitions',
-          name: 'learn.definitions',
+          path: 'getting_started',
+          name: 'learn.gettingStarted',
           component: LearnTopic,
           meta: {
-            title: 'Definitions',
-            config: learn.definitions,
-            section: true,
+            title: 'Getting Started',
+            config: learn.gettingStarted,
+            section: false,
             theme: 'purple'
           }
         },
         {
-          path: 'type-definitions',
-          name: 'learn.typeDefinitions',
+          path: 'gfd_format',
+          name: 'learn.gfdFormat',
           component: LearnTopic,
           meta: {
-            title: 'Type Definitions',
-            config: learn.typeDefinitions,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'schema-definitions',
-          name: 'learn.schemaDefinitions',
-          component: LearnTopic,
-          meta: {
-            title: 'Schema Definitions',
-            config: learn.schemaDefinitions,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'functions',
-          name: 'learn.functions',
-          component: LearnTopic,
-          meta: {
-            title: 'Functions',
-            config: learn.functions,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'context',
-          name: 'learn.context',
-          component: LearnTopic,
-          meta: {
-            title: 'Context',
-            config: learn.context,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'type-language',
-          name: 'learn.typeLanguage',
-          component: LearnTopic,
-          meta: {
-            title: 'Type Language',
-            config: learn.typeLanguage,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'middleware',
-          name: 'learn.middleware',
-          component: LearnTopic,
-          meta: {
-            title: 'Middleware',
-            config: learn.middleware,
-            section: true,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'libraries',
-          name: 'learn.libraries',
-          component: LearnTopic,
-          meta: {
-            title: 'Libraries',
-            config: learn.libraries,
-            section: true,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'build-library',
-          name: 'learn.buildLibrary',
-          component: LearnTopic,
-          meta: {
-            title: 'Building a Library',
-            config: learn.buildLibrary,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'registry',
-          name: 'learn.registry',
-          component: LearnTopic,
-          meta: {
-            title: 'Registry',
-            config: learn.registry,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'making-requests',
-          name: 'learn.makingRequests',
-          component: LearnTopic,
-          meta: {
-            title: 'MakingRequests',
-            config: learn.makingRequests,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'plugins',
-          name: 'learn.plugins',
-          component: LearnTopic,
-          meta: {
-            title: 'Plugins',
-            config: learn.plugins,
-            section: true,
-            theme: 'purple'
-          }
-        },
-        {
-          path: 'authoring-plugins',
-          name: 'learn.authoringPlugins',
-          component: LearnTopic,
-          meta: {
-            title: 'Authoring Plugins',
-            config: learn.authoringPlugins,
+            title: 'GFD Format',
+            config: learn.gfdFormat,
+            section: false,
             theme: 'purple'
           }
         }
@@ -226,6 +115,16 @@ const router = new Router({
           component: ApiClass,
           meta: {
             title: 'SchemaDefinition',
+            theme: 'carbon',
+            config: api.schemaDefinition
+          }
+        },
+        {
+          path: 'SchemaBacking',
+          name: 'api.schemabacking',
+          component: ApiClass,
+          meta: {
+            title: 'SchemaBacking',
             theme: 'carbon',
             config: api.schemaDefinition
           }

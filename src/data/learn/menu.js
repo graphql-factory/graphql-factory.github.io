@@ -14,7 +14,12 @@ export default {
       content: 'Introduction',
       items: [
         {
-          content: 'Setup'
+          content: 'Overview',
+          route: { name: 'learn' }
+        },
+        {
+          content: 'Getting Started',
+          route: { name: 'learn.gettingStarted' }
         }
       ]
     },
@@ -22,16 +27,20 @@ export default {
       content: 'Definition',
       items: [
         {
-          content: 'SchemaDefinition'
+          content: 'GFD Format',
+          route: { name: 'learn.gfdFormat' }
         },
         {
-          content: 'Type Definitions'
+          content: 'SchemaDefinition',
+          route: { name: 'learn.documenting' }
         },
         {
-          content: 'Schema Definition'
+          content: 'Type Definitions',
+          route: { name: 'learn.documenting' }
         },
         {
-          content: 'Functions'
+          content: 'Functions',
+          route: { name: 'learn.documenting' }
         }
       ]
     },
@@ -39,7 +48,8 @@ export default {
       content: 'Backing',
       items: [
         {
-          content: 'SchemaBacking'
+          content: 'SchemaBacking',
+          route: { name: 'learn.documenting' }
         }
       ]
     },
@@ -47,7 +57,8 @@ export default {
       content: 'Directives',
       items: [
         {
-          content: 'Middleware'
+          content: 'Middleware',
+          route: { name: 'learn.documenting' }
         }
       ]
     },
@@ -55,7 +66,29 @@ export default {
       content: 'Plugins',
       items: [
         {
-          content: 'Authoring'
+          content: 'Authoring',
+          route: { name: 'learn.documenting' }
+        }
+      ]
+    },
+    {
+      content: 'Execution',
+      items: [
+        {
+          content: 'Custom Execution',
+          route: { name: 'learn.documenting' }
+        },
+        {
+          content: 'Context',
+          route: { name: 'learn.documenting' }
+        },
+        {
+          content: 'Extensions',
+          route: { name: 'learn.documenting' }
+        },
+        {
+          content: 'Tracing',
+          route: { name: 'learn.documenting' }
         }
       ]
     }

@@ -153,3 +153,7 @@ label:focus,
 .api-class a {
   color:#3f87a6;
 }
+
+.bordered {
+  border: 1px solid rgb(236, 235, 235);
+}

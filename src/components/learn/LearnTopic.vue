@@ -39,7 +39,7 @@
       getClass (type) {
         switch (type) {
           case 'prism':
-            return ['prism-custom']
+            return ['bordered']
           default:
             return []
         }

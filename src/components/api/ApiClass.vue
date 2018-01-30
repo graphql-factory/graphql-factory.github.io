@@ -58,7 +58,7 @@
           )
         .bigspace(v-if="method.examples")
           b Example{{method.examples.length > 1 ? 's' : ''}}
-          prism(v-for="(example, index) in method.examples", :key="index", :language="example.language", :code="example.code")
+          prism.bordered(v-for="(example, index) in method.examples", :key="index", :language="example.language", :code="example.code")
         p(v-if="method.readMore")
           a(href="") Read more about this method →
         hr
@@ -86,9 +86,6 @@ export default {
 </script>
 
 <style scoped>
-.bordered {
-  border: 1px solid rgb(236, 235, 235);
-}
 .title {
   margin-top: 2em;
 }
