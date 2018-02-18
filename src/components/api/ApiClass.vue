@@ -12,7 +12,7 @@
     )
     hr
     div(v-if="config.constructor")
-      h5
+      h5(id="constructor-anchor")
         |  Constructor
       p
         | Creates a new instance of&nbsp;
@@ -25,7 +25,7 @@
       )
       hr
     div(v-if="config.properties")
-      h5
+      h5(id="properties-anchor")
         |  Properties
       div(v-for="(prop, index) in config.properties", :key="index")
         h6.title(:id="prop.name + '-anchor'")
@@ -33,7 +33,7 @@
         span(v-html="prop.description")
       hr
     div(v-if="config.events")
-      h5
+      h5(id="events-anchor")
         |  Events
       div(v-for="(event, index) in config.events", :key="index")
         h6.title(:id="'event.' + event.name + '-anchor'")
@@ -41,7 +41,7 @@
         span(v-html="event.description")
       hr
     div(v-if="config.methods")
-      h5
+      h5(id="methods-anchor")
         |  Methods
       div(v-for="(method, index) in config.methods", :key="index")
         h5.title(:id="method.name + '-anchor'")

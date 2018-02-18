@@ -7,12 +7,19 @@
     | imported into a project.
     callout(type="info", html="Please note that the examples here use ES7 syntax which may \
     require a library like <a href=https://babeljs.io/ target=_blank>babel.js</a>")
+    hr(style="margin-top: 3em; margin-bottom: 2em;")
     h4.weak SchemaDefinition
     p A class for iteratively building a schema definition in GraphQL Factory Definition Format which can be exported in various formats and used to construct a GraphQLSchema
+    ul
+      router-link.pointer.link(tag="li", :to="{ name: 'api.schemadefinition', hash: '#constructor' }") Constructor
+      router-link.pointer.link(tag="li", :to="{ name: 'api.schemadefinition', hash: '#properties' }") Properties
+      router-link.pointer.link(tag="li", :to="{ name: 'api.schemadefinition', hash: '#events' }") Events
+      router-link.pointer.link(tag="li", :to="{ name: 'api.schemadefinition', hash: '#methods' }") Methods
     b Example
     prism(language="javascript", :code="definitionExample")
-    router-link(:to="{ name: 'api.schemadefinition'}") Read more about this class →
+    router-link(:to="{ name: 'api.schemadefinition' }") Read more about this class →
     p
+    hr(style="margin-top: 3em; margin-bottom: 2em;")
     h4.weak SchemaBacking
     p A class for iteratively building a backing object which contains functions that can be mapped to a schema build using schema language
     b Example

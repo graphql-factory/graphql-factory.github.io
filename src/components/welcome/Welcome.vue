@@ -2,7 +2,7 @@
   .container(style="text-align: center;")
     h2(:class="isMobile ? '' : 'display-3'", style="font-weight:400;") GraphQL Factory
     p.lead(:class="isMobile ? 'smaller-lead' : ''")
-      | An extensible toolkit for building graphql schemas
+      | Tools for building GraphQL
     img.factory-logo(src="../../assets/graphql-factory.svg", :class="logoClass", :style="logoStyle", @click="animatingLogo=!animatingLogo")
 </template>
 

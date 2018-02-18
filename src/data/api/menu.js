@@ -124,7 +124,23 @@ export default {
         },
         {
           content: 'Properties',
-          items: []
+          items: [
+            {
+              content: 'types'
+            },
+            {
+              content: 'directives'
+            },
+            {
+              content: 'enums'
+            },
+            {
+              content: 'backing'
+            },
+            {
+              content: 'version'
+            }
+          ]
         },
         {
           content: 'Methods',
@@ -143,6 +159,9 @@ export default {
             },
             {
               content: 'Union()'
+            },
+            {
+              content: 'Enum()'
             },
             {
               content: 'export()'

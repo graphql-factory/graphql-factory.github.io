@@ -126,7 +126,7 @@ const router = new Router({
           meta: {
             title: 'SchemaBacking',
             theme: 'carbon',
-            config: api.schemaDefinition
+            config: api.schemaBacking
           }
         }
       ]

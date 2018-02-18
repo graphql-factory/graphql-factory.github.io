@@ -1,4 +1,5 @@
 export default {
+  anchor: 'api.schemadefinition',
   heading: 'SchemaDefinition',
   description: 'Constructs a schema definition in <a href="#">GraphQL Factory Definition Format</a>. ' +
   'Merges all inputs/imports into a single definition with customizable merge conflict resolution. ' +
